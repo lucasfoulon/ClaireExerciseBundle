@@ -74,7 +74,7 @@
             <call method="setAnnotateRepository">
                 <argument type="service" id="simple_it.exercise.repository.annotate"/>
             </call>
-            <call method="setEntityService">
+            <call method="setResourceService">
                 <argument type="service" id="simple_it.exercise.exercise_resource"/>
             </call>
         </service>
