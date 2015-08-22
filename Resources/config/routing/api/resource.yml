@@ -160,3 +160,12 @@ api_metadata_delete_by_resource:
         _format: json
         resourceId: \d+
 
+
+
+api_annotate_list_by_resource:
+    pattern:  /{resourceId}/annotates/
+    defaults: { _controller: SimpleITClaireExerciseBundle:Api/ExerciseResource/AnnotateByResource:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        resourceId: \d+
