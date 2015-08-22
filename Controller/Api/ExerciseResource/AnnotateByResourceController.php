@@ -27,4 +27,34 @@ use SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateResourceFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 class AnnotateByResourceController extends BaseController
-{}
+{
+    /**
+     * Get all annotate
+     *
+     * @param mixed                 $resourceId
+     * @param CollectionInformation $collectionInformation
+     *
+     * @throws ApiNotFoundException
+     * @return ApiGotResponse
+     */
+    public function listAction(
+        $resourceId,
+        CollectionInformation $collectionInformation
+    )
+    {
+        try {
+            $annotates = $this->get('simple_it.exercise.annotate')->getAll(
+                $collectionInformation,
+                $resourceId,
+                $this->getUserId()
+            );
+
+            //$annotateResources = AnnotateResourceFactory::createCollection($annotates);
+            $annotateResources = "ok";
+
+            return new ApiGotResponse($annotateResources);
+        } catch (NonExistingObjectException $neoe) {
+            throw new ApiNotFoundException(AnnotateResource::RESOURCE_NAME);
+        }
+    }
+}
