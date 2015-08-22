@@ -97,6 +97,9 @@ resourceControllers.controller('resourceController', ['$scope', '$modal',
                     "draft": false,
                     "complete": null,
                     "metadata": [],
+                    //TODO LUCAS
+                    "annotate": [],
+                    //FIN TODO LUCAS
                     "keywords": [],
                     "content": {
                         "text": null,

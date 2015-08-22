@@ -768,6 +768,57 @@
     </div>
 </div>
 
+
+    <!--TODO LUCAS -->
+
+    <div ng-if="editedResource.type === 'text'"
+         class="panel panel-success" ><!-- data-ng-controller="resourceTextController"> -->
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>Annotations</h4>
+
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <input id="resourceAddListAnnotate" type="text" value=""
+                                   placeholder="PAS FINI nouvelle liste d'annotation" class="form-control"></div>
+                        <div class="col-xs-1"><span data-ng-click=""
+                                                    class="glyphicon glyphicon-ok"
+                                                    title="Ajouter cette liste"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="resourceAnnotates">
+
+                        </div>
+                    </div>
+
+                    <div id="viewAnnotateForResource" class="row">
+                        <div ng-repeat="annotate in editedResource.annotate track by $index">
+                            <div class="col-xs-5">
+                                <input type="text" ng-model="annotate.value" class="form-control" disabled>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" ng-model="annotate.start" class="form-control" disabled>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" ng-model="annotate.listname" class="form-control" disabled>
+                            </div>
+                            <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.annotate, $index)"
+                                                        class="glyphicon glyphicon-remove"
+                                                        title="Supprimer cette annotation"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TODO FIN LUCAS -->
+
 <div class="panel panel-success">
     <div class="panel-heading">
         <h4>Mots-clés</h4>
