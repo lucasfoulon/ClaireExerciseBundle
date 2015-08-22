@@ -48,4 +48,36 @@ class AnnotateService extends TransactionalService
     {
         $this->resourceService = $resourceService;
     }
+
+
+    /**
+     * Get all the annotate
+     *
+     * @param CollectionInformation $collectionInformation
+     * @param int                   $entityId
+     * @param int                   $userId
+     *
+     * @throws AccessDeniedException
+     * @return array
+     */
+    public function getAll(
+        $collectionInformation = null,
+        $entityId = null,
+        $userId = null
+    )
+    {
+        $entity = null;
+        if (!is_null($entityId)) {
+            $entity = $this->resourceService->get($entityId);
+            if (!$entity->getPublic() && $entity->getOwner()->getId() !== $userId) {
+                throw new AccessDeniedException();
+            }
+        }
+
+        return $this->annotateRepository->findAllBy(
+            $collectionInformation,
+            $entity
+        );
+    }
+
 }
