@@ -46,6 +46,9 @@
             <call method="setMetadataService">
                 <argument type="service" id="simple_it.exercise.resource_metadata"/>
             </call>
+            <call method="setAnnotateService">
+                <argument type="service" id="simple_it.exercise.annotate"/>
+            </call>
         </service>
 
         <service id="simple_it.exercise.resource_metadata" class="%simple_it.exercise.resource_metadata.class%">
