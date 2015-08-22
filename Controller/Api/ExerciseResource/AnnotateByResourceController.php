@@ -38,13 +38,11 @@ class AnnotateByResourceController extends BaseController
      * @return ApiGotResponse
      */
     public function listAction(
-        $resourceId,
-        CollectionInformation $collectionInformation
+        $resourceId
     )
     {
         try {
             $annotates = $this->get('simple_it.exercise.annotate')->getAll(
-                $collectionInformation,
                 $resourceId,
                 $this->getUserId()
             );
