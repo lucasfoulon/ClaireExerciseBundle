@@ -29,4 +29,44 @@ class AnnotateRepository extends BaseRepository
 
     const ENTITY_NAME = 'resource';
 
+    /**
+     * Find a collection with parameters from collection information
+     *
+     * @param Resource $resource Resource
+     *
+     * @throws ApiNotFoundException
+     * @return array
+     */
+    public function findAllBy($resource = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('a');
+
+        if (!is_null($resource)) {
+            $queryBuilder->where(
+                $queryBuilder->expr()->eq(
+                    'a.resource',
+                    $resource->getId()
+                )
+            );
+        }
+
+        $queryBuilder->add('orderBy', 'a.value', true);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Delete all the annotate for an entity
+     *
+     * @param SharedEntity $entity
+     */
+    public function deleteAllByEntity($entity)
+    {
+        if (count($entity->getMetadata()) > 0) {
+            $qb = $this->createQueryBuilder('a');
+            $qb->delete(get_class($entity->getMetadata()[0]), 'a');
+            $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
+            $qb->getQuery()->getResult();
+        }
+    }
 }
