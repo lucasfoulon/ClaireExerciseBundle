@@ -61,7 +61,6 @@ class AnnotateService extends TransactionalService
      * @return array
      */
     public function getAll(
-        $collectionInformation = null,
         $entityId = null,
         $userId = null
     )
@@ -75,7 +74,6 @@ class AnnotateService extends TransactionalService
         }
 
         return $this->annotateRepository->findAllBy(
-            $collectionInformation,
             $entity
         );
     }
