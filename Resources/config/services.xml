@@ -56,6 +56,10 @@
         <parameter key="simple_it.exercise.entity.resource_metadata.class">SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Metadata</parameter>
         <parameter key="simple_it.exercise.repository.resource_metadata.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\ExerciseResource\MetadataRepository</parameter>
 
+        <parameter key="simple_it.exercise.annotate.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\AnnotateService</parameter>
+        <parameter key="simple_it.exercise.entity.annotate.class">SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate</parameter>
+        <parameter key="simple_it.exercise.repository.annotate.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateRepository</parameter>
+
         <parameter key="simple_it.exercise.serializer.class">SimpleIT\ClaireExerciseBundle\Service\Serializer\Serializer</parameter>
     </parameters>
 
