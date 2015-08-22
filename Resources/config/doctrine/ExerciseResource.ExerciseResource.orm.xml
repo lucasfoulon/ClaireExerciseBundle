@@ -25,6 +25,13 @@
             </cascade>
         </one-to-many>
 
+        <one-to-many target-entity="SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Annotate" mapped-by="resource" field="annotate">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+
         <many-to-one field="parent" target-entity="ExerciseResource" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id"/>
         </many-to-one>
