@@ -26,6 +26,10 @@
             <argument>%simple_it.exercise.entity.resource_metadata.class%</argument>
         </service>
 
+        <service id="simple_it.exercise.repository.annotate" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%simple_it.exercise.repository.annotate.class%">
+            <argument>%simple_it.exercise.entity.annotate.class%</argument>
+        </service>
+
         <!-- Services -->
         <service id="simple_it.exercise.exercise_resource" class="%simple_it.exercise.exercise_resource.class%">
             <call method="setEntityManager">
@@ -57,6 +61,18 @@
             </call>
             <call method="setMetadataRepository">
                 <argument type="service" id="simple_it.exercise.repository.resource_metadata"/>
+            </call>
+            <call method="setEntityService">
+                <argument type="service" id="simple_it.exercise.exercise_resource"/>
+            </call>
+        </service>
+
+        <service id="simple_it.exercise.annotate" class="%simple_it.exercise.annotate.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setAnnotateRepository">
+                <argument type="service" id="simple_it.exercise.repository.annotate"/>
             </call>
             <call method="setEntityService">
                 <argument type="service" id="simple_it.exercise.exercise_resource"/>
