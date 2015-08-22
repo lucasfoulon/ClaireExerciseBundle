@@ -12,6 +12,7 @@ use SimpleIT\ClaireExerciseBundle\Entity\CreatedExercise\Attempt;
 use SimpleIT\ClaireExerciseBundle\Entity\CreatedExercise\Item;
 use SimpleIT\ClaireExerciseBundle\Entity\CreatedExercise\StoredExercise;
 use SimpleIT\ClaireExerciseBundle\Entity\SharedEntity\SharedEntity;
+use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Exception\Api\ApiNotFoundException;
 use SimpleIT\ClaireExerciseBundle\Exception\NonExistingObjectException;
 use SimpleIT\ClaireExerciseBundle\Model\Collection\CollectionInformation;
@@ -58,13 +59,13 @@ class AnnotateRepository extends BaseRepository
     /**
      * Delete all the annotate for an entity
      *
-     * @param SharedEntity $entity
+     * @param ExerciseResource $entity
      */
     public function deleteAllByEntity($entity)
     {
         if (count($entity->getMetadata()) > 0) {
             $qb = $this->createQueryBuilder('a');
-            $qb->delete(get_class($entity->getMetadata()[0]), 'a');
+            $qb->delete(get_class($entity->getAnnotate()[0]), 'a');
             $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
             $qb->getQuery()->getResult();
         }
