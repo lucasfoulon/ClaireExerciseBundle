@@ -25,7 +25,7 @@
             </cascade>
         </one-to-many>
 
-        <one-to-many target-entity="SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Annotate" mapped-by="resource" field="annotate">
+        <one-to-many target-entity="SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate" mapped-by="resource" field="annotate">
             <cascade>
                 <cascade-persist/>
                 <cascade-remove/>
