@@ -65,8 +65,8 @@ abstract class ResourceResourceFactory extends SharedResourceFactory
         $annotateArray = array();
         /** @var Annotate $an */
         foreach ($resource->getAnnotate() as $an) {
-            $annotateArray[] = AnnotateResourceFactory::createFromValue(
-                $an->getValue()
+            $annotateArray[] = AnnotateResourceFactory::create(
+                $an
             );
         }
         $resourceResource->setAnnotate($annotateArray);

@@ -43,6 +43,7 @@ abstract class AnnotateResourceFactory
     public static function create($annotate)
     {
         $annotateResource = new AnnotateResource();
+        $annotateResource->setId($annotate->getId());
         $annotateResource->setValue($annotate->getValue());
 
         return $annotateResource;
