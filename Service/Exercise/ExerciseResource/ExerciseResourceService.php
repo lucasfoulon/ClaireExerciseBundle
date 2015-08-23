@@ -20,6 +20,7 @@ namespace SimpleIT\ClaireExerciseBundle\Service\Exercise\ExerciseResource;
 
 use Claroline\CoreBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate;
 use SimpleIT\ClaireExerciseBundle\Entity\DomainKnowledge\Knowledge;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Metadata;
@@ -30,6 +31,7 @@ use SimpleIT\ClaireExerciseBundle\Exception\InvalidExerciseResourceException;
 use SimpleIT\ClaireExerciseBundle\Exception\InvalidTypeException;
 use SimpleIT\ClaireExerciseBundle\Exception\NonExistingObjectException;
 use SimpleIT\ClaireExerciseBundle\Model\ExerciseObject\ExerciseObjectFactory;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateResourceFactory;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\DomainKnowledge\Formula\LocalFormula;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseObject\ExerciseObject;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\CommonResource;
@@ -201,6 +203,23 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
     )
     {
         parent::updateFromSharedResource($resourceResource, $exerciseResource, 'resource_storage');
+
+        //annotate
+        $annotate = array();
+        $resAnnotate= $resourceResource->getAnnotate();
+
+        if(!empty($resAnnotate)) {
+            foreach ($resAnnotate as $resAnnotateUni) {
+                $an = new Annotate();
+                $an->setValue($resAnnotateUni->getValue());
+                $an->setResource($exerciseResource);
+                //if(typeof $an->getId())
+                $annotate[] = $an;
+            }
+        }
+        $exerciseResource->setAnnotate(new ArrayCollection($annotate));
+        //fin annotate
+
         $exerciseResource = $this->computeRequirements($exerciseResource, $resourceResource);
 
         if (!is_null($resourceResource->getArchived())) {
