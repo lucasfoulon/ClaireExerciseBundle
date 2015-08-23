@@ -200,6 +200,13 @@ class ResourceResource extends SharedResource
     protected $keywords;
 
     /**
+     * @var array
+     * @Serializer\Type("array<SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateResource>")
+     * @Serializer\Groups({"details", "resource_list"})
+     */
+    protected $annotate;
+
+    /**
      * @var int
      * @Serializer\Type("integer")
      * @Serializer\Groups({"details"})
@@ -318,5 +325,25 @@ class ResourceResource extends SharedResource
     public function getClass()
     {
         return self::getSerializationClass($this->type);
+    }
+
+    /**
+     * Set annotate
+     *
+     * @param array $annotate
+     */
+    public function setAnnotate($annotate)
+    {
+        $this->annotate = $annotate;
+    }
+
+    /**
+     * Get annotate
+     *
+     * @return array
+     */
+    public function getAnnotate()
+    {
+        return $this->annotate;
     }
 }
