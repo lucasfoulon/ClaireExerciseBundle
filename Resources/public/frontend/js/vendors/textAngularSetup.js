@@ -409,12 +409,6 @@ angular.module('textAngularSetup', [])
 					$scope.editedResource.annotate.push(annotation);
 
 					console.log($scope.editedResource.annotate);
-					//console.log($scope);
-
-					$injector = el.injector();
-					$injector.invoke(function($compile){
-						$compile(el)($scope)
-					})
 				}
 
 				var element = document.getElementById("viewAnnotateForResource");
