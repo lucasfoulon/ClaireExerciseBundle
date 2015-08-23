@@ -9,6 +9,7 @@
 namespace SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate;
 
 use SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate;
+use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Entity\SharedEntity\SharedEntity;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateResource;
 use SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateRepository;
@@ -76,6 +77,17 @@ class AnnotateService extends TransactionalService
         return $this->annotateRepository->findAllBy(
             $entity
         );
+    }
+
+    /**
+     * Delete all the annotate for an owner resource
+     *
+     * @param ExerciseResource $resource
+     */
+    public function deleteAllByEntity($resource)
+    {
+        $this->annotateRepository->deleteAllByEntity($resource);
+        $this->em->flush();
     }
 
 }

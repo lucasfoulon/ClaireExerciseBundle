@@ -205,6 +205,7 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
         parent::updateFromSharedResource($resourceResource, $exerciseResource, 'resource_storage');
 
         //annotate
+        $this->annotateService->deleteAllByEntity($exerciseResource);
         $annotate = array();
         $resAnnotate= $resourceResource->getAnnotate();
 
