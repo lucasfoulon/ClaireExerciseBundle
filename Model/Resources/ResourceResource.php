@@ -207,6 +207,13 @@ class ResourceResource extends SharedResource
     protected $annotate;
 
     /**
+     * @var array
+     * @Serializer\Type("array<SimpleIT\ClaireExerciseBundle\Model\Resources\ListAnnotateResource>")
+     * @Serializer\Groups({"details", "resource_list"})
+     */
+    protected $list_annotate;
+
+    /**
      * @var int
      * @Serializer\Type("integer")
      * @Serializer\Groups({"details"})
@@ -345,5 +352,25 @@ class ResourceResource extends SharedResource
     public function getAnnotate()
     {
         return $this->annotate;
+    }
+
+    /**
+     * Set list_annotate
+     *
+     * @param array $list_annotate
+     */
+    public function setListAnnotate($list_annotate)
+    {
+        $this->list_annotate = $list_annotate;
+    }
+
+    /**
+     * Get list_annotate
+     *
+     * @return array
+     */
+    public function getListAnnotate()
+    {
+        return $this->list_annotate;
     }
 }
