@@ -26,6 +26,14 @@ class Annotate
      * @var string
      */
     private $value;
+    /**
+     * @var int
+     */
+    private $start;
+    /**
+     * @var int
+     */
+    private $end;
 
     /**
      * Get id
@@ -85,5 +93,45 @@ class Annotate
     public function setValue($value)
     {
         $this->value = $value;
+    }
+
+    /**
+     * Get start
+     *
+     * @return int
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * Set start
+     *
+     * @param int $start
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+    }
+
+    /**
+     * Get end
+     *
+     * @return int
+     */
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    /**
+     * Set end
+     *
+     * @param int $end
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
     }
 }

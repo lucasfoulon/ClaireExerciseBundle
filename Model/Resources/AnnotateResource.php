@@ -38,6 +38,22 @@ class AnnotateResource
     private $value;
 
     /**
+     * @var int $start Position start of annotate
+     * @Serializer\Type("integer")
+     * @Serializer\Groups({"details", "list", "resource_list"})
+     * @Assert\Blank(groups={"create","edit"})
+     */
+    protected $start;
+
+    /**
+     * @var int $end Position end of annotate
+     * @Serializer\Type("integer")
+     * @Serializer\Groups({"details", "list", "resource_list"})
+     * @Assert\Blank(groups={"create","edit"})
+     */
+    protected $end;
+
+    /**
      * Get id
      *
      * @return int
@@ -75,5 +91,45 @@ class AnnotateResource
     public function setValue($value)
     {
         $this->value = $value;
+    }
+
+    /**
+     * Get start
+     *
+     * @return int
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * Set start
+     *
+     * @param int $start
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+    }
+
+    /**
+     * Get end
+     *
+     * @return int
+     */
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    /**
+     * Set end
+     *
+     * @param int $end
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
     }
 }
