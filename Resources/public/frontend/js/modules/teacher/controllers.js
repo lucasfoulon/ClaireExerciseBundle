@@ -99,7 +99,7 @@ resourceControllers.controller('resourceController', ['$scope', '$modal',
                     "metadata": [],
                     //TODO LUCAS
                     "annotate": [],
-                    "listA": [],
+                    "list_annotate": [],
                     //FIN TODO LUCAS
                     "keywords": [],
                     "content": {
@@ -573,11 +573,11 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
         };
 
         $scope.resourceAddListAnnotate = function () {
-            if(typeof $scope.editedResource.listA == "undefined")
-                $scope.editedResource.listA = new Array();
+            if(typeof $scope.editedResource.list_annotate == "undefined")
+                $scope.editedResource.list_annotate = new Array();
             var name = $("#resourceAddListAnnotate");
             var newElement = {name: name[0].value, annotate: new Array()};
-            $scope.editedResource.listA.push(newElement);
+            $scope.editedResource.list_annotate.push(newElement);
             name[0].value = '';
             console.log($scope.editedResource);
         };
