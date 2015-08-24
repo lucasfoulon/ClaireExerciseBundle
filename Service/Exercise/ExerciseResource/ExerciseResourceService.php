@@ -53,6 +53,7 @@ use SimpleIT\ClaireExerciseBundle\Model\Resources\ResourceResource;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ResourceResourceFactory;
 use SimpleIT\ClaireExerciseBundle\Repository\Exercise\ExerciseResource\ExerciseResourceRepository;
 use SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\AnnotateService;
+use SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\ListAnnotateService;
 use SimpleIT\ClaireExerciseBundle\Service\Exercise\DomainKnowledge\KnowledgeServiceInterface;
 use SimpleIT\ClaireExerciseBundle\Service\Exercise\SharedEntity\SharedEntityService;
 
@@ -74,6 +75,11 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
      * @var AnnotateService
      */
     private $annotateService;
+
+    /**
+     * @var ListAnnotateService
+     */
+    private $listAnnotateService;
 
     /**
      * @var ExerciseResourceRepository
@@ -98,6 +104,16 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
     public function setAnnotateService($annotateService)
     {
         $this->annotateService = $annotateService;
+    }
+
+    /**
+     * Set listAnnotateService
+     *
+     * @param \SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\ListAnnotateService $listAnnotateService
+     */
+    public function setListAnnotateService($listAnnotateService)
+    {
+        $this->listAnnotateService = $listAnnotateService;
     }
 
     /**
