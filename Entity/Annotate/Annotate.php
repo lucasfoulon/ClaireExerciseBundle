@@ -7,8 +7,6 @@
  */
 namespace SimpleIT\ClaireExerciseBundle\Entity\Annotate;
 
-use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
-
 
 class Annotate
 {
@@ -18,9 +16,9 @@ class Annotate
     private $id;
 
     /**
-     * @var ExerciseResource
+     * @var ListAnnotate
      */
-    private $resource;
+    private $list_annotate;
 
     /**
      * @var string
@@ -56,23 +54,23 @@ class Annotate
     }
 
     /**
-     * Set resource
+     * Set list_annotate
      *
-     * @param ExerciseResource $resource
+     * @param ListAnnotate $list_annotate
      */
-    public function setResource($resource)
+    public function setListAnnotate($list_annotate)
     {
-        $this->resource = $resource;
+        $this->list_annotate = $list_annotate;
     }
 
     /**
-     * Get resource
+     * Get list_annotate
      *
-     * @return ExerciseResource
+     * @return ListAnnotate
      */
-    public function getResource()
+    public function getListAnnotate()
     {
-        return $this->resource;
+        return $this->list_annotate;
     }
 
     /**

@@ -30,6 +30,11 @@ class ListAnnotateService extends TransactionalService
     protected $resourceService;
 
     /**
+     * @var AnnotateService
+     */
+    private $annotateService;
+
+    /**
      * Set listAnnotateRepository
      *
      * @param ListAnnotateRepository $listAnnotateRepository
@@ -47,6 +52,16 @@ class ListAnnotateService extends TransactionalService
     public function setResourceService($resourceService)
     {
         $this->resourceService = $resourceService;
+    }
+
+    /**
+     * Set annotateService
+     *
+     * @param \SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\AnnotateService $annotateService
+     */
+    public function setAnnotateService($annotateService)
+    {
+        $this->annotateService = $annotateService;
     }
 
 
@@ -85,6 +100,7 @@ class ListAnnotateService extends TransactionalService
      */
     public function deleteAllByEntity($resource)
     {
+        $this->annotateService->deleteAllByEntity($resource);
         $this->listAnnotateRepository->deleteAllByEntity($resource);
         $this->em->flush();
     }

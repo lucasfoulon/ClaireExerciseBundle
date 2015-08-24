@@ -222,7 +222,7 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
         parent::updateFromSharedResource($resourceResource, $exerciseResource, 'resource_storage');
 
         //annotate
-        $this->annotateService->deleteAllByEntity($exerciseResource);
+        /*$this->annotateService->deleteAllByEntity($exerciseResource);
         $annotate = array();
         $resAnnotate= $resourceResource->getAnnotate();
 
@@ -237,7 +237,7 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                 $annotate[] = $an;
             }
         }
-        $exerciseResource->setAnnotate(new ArrayCollection($annotate));
+        $exerciseResource->setAnnotate(new ArrayCollection($annotate));*/
         //fin annotate
 
         // list annotate
@@ -251,6 +251,26 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                 $lan->setName($resListAnnotateUni->getName());
                 $lan->setResource($exerciseResource);
                 $lan->setId($resListAnnotateUni->getId());
+                //$lan->setAnnotate($resListAnnotateUni->getAnnotate());
+
+                //annotate
+                $annotate = array();
+                $resAnnotate= $resListAnnotateUni->getAnnotate();
+
+                if(!empty($resAnnotate)) {
+                    foreach ($resAnnotate as $resAnnotateUni) {
+                        $an = new Annotate();
+                        $an->setValue($resAnnotateUni->getValue());
+                        $an->setListAnnotate($lan);
+                        $an->setId($resAnnotateUni->getId());
+                        $an->setStart($resAnnotateUni->getStart());
+                        $an->setEnd($resAnnotateUni->getEnd());
+                        $annotate[] = $an;
+                    }
+                }
+                $lan->setAnnotate(new ArrayCollection($annotate));
+                //fin annotate
+
                 $list_annotate[] = $lan;
             }
         }

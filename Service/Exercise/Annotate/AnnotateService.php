@@ -26,9 +26,9 @@ class AnnotateService extends TransactionalService
     protected $annotateRepository;
 
     /**
-     * @var ExerciseResourceService
+     * @var ListAnnotateService
      */
-    protected $resourceService;
+    protected $listAnnotateService;
 
     /**
      * Set annotateRepository
@@ -41,13 +41,13 @@ class AnnotateService extends TransactionalService
     }
 
     /**
-     * Set resource service
+     * Set list annotate service
      *
-     * @param ExerciseResourceServiceInterface $resourceService
+     * @param ListAnnotateService $listAnnotate
      */
-    public function setResourceService($resourceService)
+    public function setListAnnotateService($listAnnotateService)
     {
-        $this->resourceService = $resourceService;
+        $this->listAnnotateService = $listAnnotateService;
     }
 
 
@@ -55,27 +55,28 @@ class AnnotateService extends TransactionalService
      * Get all the annotate
      *
      * @param CollectionInformation $collectionInformation
-     * @param int                   $entityId
+     * @param int                   $listAnnotateId
      * @param int                   $userId
      *
      * @throws AccessDeniedException
      * @return array
      */
     public function getAll(
-        $entityId = null,
+        $resourceId = null,
+        $listAnnotateId = null,
         $userId = null
     )
     {
-        $entity = null;
-        if (!is_null($entityId)) {
-            $entity = $this->resourceService->get($entityId);
-            if (!$entity->getPublic() && $entity->getOwner()->getId() !== $userId) {
+        $listAnnotate = null;
+        if (!is_null($listAnnotateId)) {
+            $listAnnotate = $this->listAnnotateService->getAll($resourceId,$userId);
+            /*if (!$listAnnotate->getPublic() && $listAnnotate->getOwner()->getId() !== $userId) {
                 throw new AccessDeniedException();
-            }
+            }*/
         }
 
         return $this->annotateRepository->findAllBy(
-            $entity
+            $listAnnotate[0]
         );
     }
 
@@ -89,5 +90,4 @@ class AnnotateService extends TransactionalService
         $this->annotateRepository->deleteAllByEntity($resource);
         $this->em->flush();
     }
-
 }

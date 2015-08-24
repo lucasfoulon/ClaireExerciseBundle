@@ -25,27 +25,27 @@ class AnnotateRepository extends BaseRepository
 {
     const ANNOTATE_TABLE = 'claire_exercise_resource_annotate';
 
-    const ENTITY_ID_FIELD_NAME = 'resource_id';
+    const ENTITY_ID_FIELD_NAME = 'list_annotate_id';
 
-    const ENTITY_NAME = 'resource';
+    const ENTITY_NAME = 'list_annotate';
 
     /**
      * Find a collection with parameters from collection information
      *
-     * @param Resource $resource Resource
+     * @param ListAnnotate $list_annotate ListAnnotate
      *
      * @throws ApiNotFoundException
      * @return array
      */
-    public function findAllBy($resource = null)
+    public function findAllBy($list_annotate = null)
     {
         $queryBuilder = $this->createQueryBuilder('a');
 
-        if (!is_null($resource)) {
+        if (!is_null($list_annotate)) {
             $queryBuilder->where(
                 $queryBuilder->expr()->eq(
-                    'a.resource',
-                    $resource->getId()
+                    'a.list_annotate',
+                    $list_annotate->getId()
                 )
             );
         }
@@ -62,10 +62,24 @@ class AnnotateRepository extends BaseRepository
      */
     public function deleteAllByEntity($entity)
     {
-        if (count($entity->getAnnotate()) > 0) {
+        if (count($entity->getListAnnotate()) > 0) {
+            foreach($entity->getListAnnotate() as $list_annotate) {
+               $this->deleteAllByListAnnotate($list_annotate);
+            }
+        }
+    }
+
+    /**
+     * Delete all the annotate for an list annotate
+     *
+     * @param ListAnnotate $list_annotate
+     */
+    public function deleteAllByListAnnotate($list_annotate)
+    {
+        if (count($list_annotate->getAnnotate()) > 0) {
             $qb = $this->createQueryBuilder('a');
-            $qb->delete(get_class($entity->getAnnotate()[0]), 'a');
-            $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
+            $qb->delete(get_class($list_annotate->getAnnotate()[0]), 'a');
+            $qb->where($qb->expr()->eq('a.list_annotate', $list_annotate->getId()));
             $qb->getQuery()->getResult();
         }
     }
