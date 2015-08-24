@@ -45,6 +45,8 @@ abstract class AnnotateResourceFactory
         $annotateResource = new AnnotateResource();
         $annotateResource->setId($annotate->getId());
         $annotateResource->setValue($annotate->getValue());
+        $annotateResource->setStart($annotate->getStart());
+        $annotateResource->setEnd($annotate->getEnd());
 
         return $annotateResource;
     }
