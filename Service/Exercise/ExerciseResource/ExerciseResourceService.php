@@ -21,6 +21,7 @@ namespace SimpleIT\ClaireExerciseBundle\Service\Exercise\ExerciseResource;
 use Claroline\CoreBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate;
+use SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate;
 use SimpleIT\ClaireExerciseBundle\Entity\DomainKnowledge\Knowledge;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Metadata;
@@ -238,6 +239,23 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
         }
         $exerciseResource->setAnnotate(new ArrayCollection($annotate));
         //fin annotate
+
+        // list annotate
+        $this->listAnnotateService->deleteAllByEntity($exerciseResource);
+        $list_annotate = array();
+        $resListAnnotate= $resourceResource->getListAnnotate();
+
+        if(!empty($resListAnnotate)) {
+            foreach ($resListAnnotate as $resListAnnotateUni) {
+                $lan = new ListAnnotate();
+                $lan->setName($resListAnnotateUni->getName());
+                $lan->setResource($exerciseResource);
+                $lan->setId($resListAnnotateUni->getId());
+                $list_annotate[] = $lan;
+            }
+        }
+        $exerciseResource->setListAnnotate(new ArrayCollection($list_annotate));
+        //fin  list annotate
 
         $exerciseResource = $this->computeRequirements($exerciseResource, $resourceResource);
 
