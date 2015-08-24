@@ -246,7 +246,7 @@ class ExerciseResource extends SharedEntity
     /**
      * Set list_annotate
      *
-     * @param \Doctrine\Common\Collections\Collection $annotate
+     * @param \Doctrine\Common\Collections\Collection $list_annotate
      */
     public function setListAnnotate($list_annotate)
     {
