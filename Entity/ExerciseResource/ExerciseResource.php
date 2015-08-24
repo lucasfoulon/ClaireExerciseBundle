@@ -65,6 +65,11 @@ class ExerciseResource extends SharedEntity
     protected $annotate;
 
     /**
+     * @var Collection
+     */
+    protected $list_annotate;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -75,6 +80,7 @@ class ExerciseResource extends SharedEntity
         $this->requiredByResources = new ArrayCollection();
         $this->requiredByModels = new ArrayCollection();
         $this->annotate = new ArrayCollection();
+        $this->list_annotate = new ArrayCollection();
     }
 
     /**
@@ -235,5 +241,25 @@ class ExerciseResource extends SharedEntity
     public function getAnnotate()
     {
         return $this->annotate;
+    }
+
+    /**
+     * Set list_annotate
+     *
+     * @param \Doctrine\Common\Collections\Collection $annotate
+     */
+    public function setListAnnotate($list_annotate)
+    {
+        $this->list_annotate = $list_annotate;
+    }
+
+    /**
+     * Get list_annotate
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getListAnnotate()
+    {
+        return $this->list_annotate;
     }
 }
