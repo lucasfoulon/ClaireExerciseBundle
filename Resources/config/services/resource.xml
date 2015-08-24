@@ -34,6 +34,10 @@
             <argument>%simple_it.exercise.entity.annotate.class%</argument>
         </service>
 
+        <service id="simple_it.exercise.repository.list_annotate" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%simple_it.exercise.repository.list_annotate.class%">
+            <argument>%simple_it.exercise.entity.list_annotate.class%</argument>
+        </service>
+
         <!-- Services -->
         <service id="simple_it.exercise.exercise_resource" class="%simple_it.exercise.exercise_resource.class%">
             <call method="setEntityManager">
@@ -57,6 +61,9 @@
             <call method="setAnnotateService">
                 <argument type="service" id="simple_it.exercise.annotate"/>
             </call>
+            <call method="setListAnnotateService">
+                <argument type="service" id="simple_it.exercise.list_annotate"/>
+            </call>
         </service>
 
         <service id="simple_it.exercise.resource_metadata" class="%simple_it.exercise.resource_metadata.class%">
@@ -77,6 +84,18 @@
             </call>
             <call method="setAnnotateRepository">
                 <argument type="service" id="simple_it.exercise.repository.annotate"/>
+            </call>
+            <call method="setResourceService">
+                <argument type="service" id="simple_it.exercise.exercise_resource"/>
+            </call>
+        </service>
+
+        <service id="simple_it.exercise.list_annotate" class="%simple_it.exercise.list_annotate.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setListAnnotateRepository">
+                <argument type="service" id="simple_it.exercise.repository.list_annotate"/>
             </call>
             <call method="setResourceService">
                 <argument type="service" id="simple_it.exercise.exercise_resource"/>
