@@ -99,6 +99,7 @@ resourceControllers.controller('resourceController', ['$scope', '$modal',
                     "metadata": [],
                     //TODO LUCAS
                     "annotate": [],
+                    "listA": [],
                     //FIN TODO LUCAS
                     "keywords": [],
                     "content": {
@@ -569,6 +570,15 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
         $scope.resourceAddMetadataField = function (collection) {
             collection.push($scope.resourceAddMD);
             $scope.resourceCancelMD();
+        };
+
+        $scope.resourceAddListAnnotate = function () {
+            if(typeof $scope.editedResource.listA == "undefined")
+                $scope.editedResource.listA = new Array();
+            var name = $("#resourceAddListAnnotate");
+            var newElement = {name: name[0].value};
+            $scope.editedResource.listA.push(newElement);
+            name[0].value = '';
         };
 
         $scope.resourceRemoveField = function (collection, index) {

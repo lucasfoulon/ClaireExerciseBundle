@@ -779,10 +779,22 @@
                     <h4>Annotations</h4>
 
                     <div class="row">
+                        <div ng-repeat="listA in editedResource.listA track by $index">
+                            <div class="col-xs-5">
+                                <input type="text" ng-model="listA.name" class="form-control" disabled>
+                            </div>
+                            <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.listA, $index)"
+                                                        class="glyphicon glyphicon-remove"
+                                                        title="Supprimer ce mot-clé"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-xs-5">
                             <input id="resourceAddListAnnotate" type="text" value=""
-                                   placeholder="PAS FINI nouvelle liste d'annotation" class="form-control"></div>
-                        <div class="col-xs-1"><span data-ng-click=""
+                                   placeholder="nouvelle liste d'annotation" class="form-control"></div>
+                        <div class="col-xs-1"><span data-ng-click="resourceAddListAnnotate()"
                                                     class="glyphicon glyphicon-ok"
                                                     title="Ajouter cette liste"></span>
                         </div>
