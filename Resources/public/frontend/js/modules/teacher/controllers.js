@@ -576,9 +576,10 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
             if(typeof $scope.editedResource.listA == "undefined")
                 $scope.editedResource.listA = new Array();
             var name = $("#resourceAddListAnnotate");
-            var newElement = {name: name[0].value};
+            var newElement = {name: name[0].value, annotate: new Array()};
             $scope.editedResource.listA.push(newElement);
             name[0].value = '';
+            console.log($scope.editedResource);
         };
 
         $scope.resourceRemoveField = function (collection, index) {
