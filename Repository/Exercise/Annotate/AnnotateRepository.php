@@ -62,7 +62,7 @@ class AnnotateRepository extends BaseRepository
      */
     public function deleteAllByEntity($entity)
     {
-        if (count($entity->getMetadata()) > 0) {
+        if (count($entity->getAnnotate()) > 0) {
             $qb = $this->createQueryBuilder('a');
             $qb->delete(get_class($entity->getAnnotate()[0]), 'a');
             $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
