@@ -7,6 +7,8 @@
  */
 namespace SimpleIT\ClaireExerciseBundle\Entity\Annotate;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 
 
@@ -26,6 +28,19 @@ class ListAnnotate
      * @var string
      */
     private $name;
+
+    /**
+     * @var Collection
+     */
+    protected $annotate;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->annotate = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -85,5 +100,25 @@ class ListAnnotate
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * Set annotate
+     *
+     * @param \Doctrine\Common\Collections\Collection $annotate
+     */
+    public function setAnnotate($annotate)
+    {
+        $this->annotate = $annotate;
+    }
+
+    /**
+     * Get annotate
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAnnotate()
+    {
+        return $this->annotate;
     }
 }
