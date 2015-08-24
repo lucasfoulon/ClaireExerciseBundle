@@ -38,6 +38,13 @@ class ListAnnotateResource
     private $name;
 
     /**
+     * @var array
+     * @Serializer\Type("array<SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateResource>")
+     * @Serializer\Groups({"details", "resource_list"})
+     */
+    protected $annotate;
+
+    /**
      * Get id
      *
      * @return int
@@ -75,5 +82,25 @@ class ListAnnotateResource
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * Set annotate
+     *
+     * @param array $annotate
+     */
+    public function setAnnotate($annotate)
+    {
+        $this->annotate = $annotate;
+    }
+
+    /**
+     * Get annotate
+     *
+     * @return array
+     */
+    public function getAnnotate()
+    {
+        return $this->annotate;
     }
 }

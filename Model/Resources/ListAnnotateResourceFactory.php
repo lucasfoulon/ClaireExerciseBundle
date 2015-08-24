@@ -45,6 +45,7 @@ abstract class ListAnnotateResourceFactory
         $listAnnotateResource = new ListAnnotateResource();
         $listAnnotateResource->setId($list_annotate->getId());
         $listAnnotateResource->setName($list_annotate->getName());
+        $listAnnotateResource->setAnnotate($list_annotate->getAnnotate());
 
         return $listAnnotateResource;
     }
