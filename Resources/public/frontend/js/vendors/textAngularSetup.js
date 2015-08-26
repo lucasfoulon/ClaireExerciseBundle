@@ -401,14 +401,26 @@ angular.module('textAngularSetup', [])
 					var el = angular.element(element);
 					$scope = el.scope();
 
-					if(typeof $scope.editedResource.annotate == "undefined")
-						$scope.editedResource.annotate = new Array();
-					var keyannotate = mots + debut + fin;
-					//Convention annotation
-					var annotation = {key: keyannotate, value: mots, start: debut, end: fin, listname: "test"};
-					$scope.editedResource.annotate.push(annotation);
+					/*if(typeof $scope.editedResource.annotate == "undefined")
+						$scope.editedResource.annotate = new Array();*/
 
-					console.log($scope.editedResource.annotate);
+                    if(typeof $scope.editedResource.numlistannotate == "undefined")
+                        $scope.editedResource.numlistannotate = -1;
+
+					if($scope.editedResource.numlistannotate != -1) {
+
+						//var keyannotate = mots + debut + fin;
+						//Convention annotation
+						var annotation = {value: mots, start: debut, end: fin};
+						//$scope.editedResource.annotate.push(annotation);
+						$scope.editedResource.list_annotate[$scope.editedResource.numlistannotate].annotate.push(annotation);
+
+
+						console.log($scope.editedResource.annotate);
+					}
+					else {
+						console.log("erreur choisir une liste");
+					}
 				}
 
 				var element = document.getElementById("viewAnnotateForResource");

@@ -550,6 +550,12 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
             collection.splice(index, 1);
         };
 
+        $scope.choiceListAnnotate = function (collection, index) {
+            console.log("okay: "+collection[index].name);
+            $scope.editedResource.numlistannotate = index;
+            //collection.splice(index, 1);
+        };
+
         $scope.addProposition = function (collection) {
             var newProposition = {"text": "Nouvelle proposition", "right": false};
             collection.splice(collection.length, 0, newProposition);
