@@ -415,8 +415,7 @@ angular.module('textAngularSetup', [])
 						//$scope.editedResource.annotate.push(annotation);
 						$scope.editedResource.list_annotate[$scope.editedResource.numlistannotate].annotate.push(annotation);
 
-
-						console.log($scope.editedResource.annotate);
+						console.log($scope.editedResource.list_annotate);
 					}
 					else {
 						console.log("erreur choisir une liste");

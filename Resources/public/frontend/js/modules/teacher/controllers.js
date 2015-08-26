@@ -551,9 +551,14 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
         };
 
         $scope.choiceListAnnotate = function (collection, index) {
-            console.log("okay: "+collection[index].name);
-            $scope.editedResource.numlistannotate = index;
-            //collection.splice(index, 1);
+            if($scope.editedResource.numlistannotate == index) {
+                $scope.editedResource.numlistannotate = -1;
+                console.log("okay: aucune liste choisi");
+            }
+            else {
+                $scope.editedResource.numlistannotate = index;
+                console.log("okay: "+collection[index].name);
+            }
         };
 
         $scope.addProposition = function (collection) {

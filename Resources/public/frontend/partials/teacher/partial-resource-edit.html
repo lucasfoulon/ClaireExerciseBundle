@@ -777,22 +777,19 @@
         <div class="row">
             <div class="col-xs-12">
                 <h4>Annotations</h4>
+                <h5>Sélectionnez une liste pour rajouter des annotations, la liste ouverte est celle en cours d'annotation</h5>
 
                 <accordion close-others="true" class="row center-block">
-                    <accordion-group  class="panel panel-default" ng-repeat="list_annotate in editedResource.list_annotate track by $index">
+                    <accordion-group class="panel panel-default" ng-repeat="list_annotate in editedResource.list_annotate track by $index">
 
                                 <accordion-heading class="panel-heading">
-                                    <div class="row">
+                                    <div class="row" data-ng-click="choiceListAnnotate(editedResource.list_annotate, $index)">
                                         <div class="col-xs-5">
                                             <span class="glyphicon glyphicon-th-list"></span>&nbsp;Nom de la liste : {{list_annotate.name}}&nbsp;<span class="caret"></span>
                                         </div>
                                         <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.list_annotate, $index)"
                                                                     class="glyphicon glyphicon-remove"
                                                                     title="Supprimer cette liste d'annotation"></span>
-                                        </div>
-                                        <div class="col-xs-1"><span data-ng-click="choiceListAnnotate(editedResource.list_annotate, $index)"
-                                                                    class="glyphicon glyphicon-pencil"
-                                                                    title="Choisir cette liste à annoter"></span>
                                         </div>
                                     </div>
                                 </accordion-heading>
