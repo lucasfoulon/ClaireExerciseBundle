@@ -155,7 +155,7 @@ angular.module('textAngularSetup', [])
 		},
 		annotate: {
 			buttontext: 'Annoter le texte',
-			tooltip: 'Annote text'
+			tooltip: 'Annoter le texte'
 		}
 	})
 	.run(['taRegisterTool', '$window', 'taTranslations', 'taSelection', function(taRegisterTool, $window, taTranslations, taSelection){
@@ -397,6 +397,20 @@ angular.module('textAngularSetup', [])
 				var fin = preCaretRange.toString().length;
 				var debut = fin - lg;
 
+				/* Permet d'afficher un popup sur le bouton d'annotation */
+				var buttonAnnotate = document.getElementsByName("annotate");
+				buttonAnnotate[0].setAttribute('data-toggle','tooltip');
+				$(document).ready(function(){
+					$('[data-toggle="tooltip"]').popover({
+						content: function() {
+							var message = "Vous devez choisir une liste plus bas dans la page avant d'annoter";
+							if($scope.editedResource.numlistannotate != -1)
+								message = "Ajouter annotation dans la liste : <b>"+$scope.editedResource.list_annotate[$scope.editedResource.numlistannotate].name+"</b>";
+							return message;
+						}, placement: "bottom", trigger: "hover", html: true});
+				});
+				/* FIN: Permet d'afficher un popup sur le bouton d'annotation */
+
 				function compile(element,mots,debut,fin){
 					var el = angular.element(element);
 					$scope = el.scope();
@@ -416,6 +430,7 @@ angular.module('textAngularSetup', [])
 						$scope.editedResource.list_annotate[$scope.editedResource.numlistannotate].annotate.push(annotation);
 
 						console.log($scope.editedResource.list_annotate);
+
 					}
 					else {
 						console.log("erreur choisir une liste");
@@ -423,7 +438,6 @@ angular.module('textAngularSetup', [])
 				}
 
 				var element = document.getElementById("viewAnnotateForResource");
-
 				compile(element,mots,debut,fin);
 			}
 		});
