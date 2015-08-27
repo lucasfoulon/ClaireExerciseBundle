@@ -45,6 +45,13 @@ class ListAnnotateResource
     protected $annotate;
 
     /**
+     * @var array
+     * @Serializer\Type("array<SimpleIT\ClaireExerciseBundle\Model\Resources\MetadataResource>")
+     * @Serializer\Groups({"details", "resource_list"})
+     */
+    protected $metadata;
+
+    /**
      * Get id
      *
      * @return int
@@ -102,5 +109,25 @@ class ListAnnotateResource
     public function getAnnotate()
     {
         return $this->annotate;
+    }
+
+    /**
+     * Set metadata
+     *
+     * @param array $metadata
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+    }
+
+    /**
+     * Get metadata
+     *
+     * @return array
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
     }
 }

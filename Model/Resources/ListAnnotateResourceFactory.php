@@ -57,6 +57,22 @@ abstract class ListAnnotateResourceFactory
         }
         $listAnnotateResource->setAnnotate($annotateArray);
 
+        // metadata //and keywords
+        $metadataArray = array();
+        //$keywordArray = array();
+        /** @var Metadata $md */
+        foreach ($list_annotate->getMetadata() as $md) {
+            //if ($md->getKey() === MetadataResource::MISC_METADATA_KEY) {
+                //$keywordArray = array_merge($keywordArray, explode(';', $md->getValue()));
+           // } else {
+                $metadataArray[] = MetadataResourceFactory::createFromKeyValue(
+                    $md->getKey(),
+                    $md->getValue()
+                );
+            //}
+        }
+        $listAnnotateResource->setMetadata($metadataArray);
+
         return $listAnnotateResource;
     }
 
