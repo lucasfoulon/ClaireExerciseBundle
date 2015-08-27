@@ -19,7 +19,7 @@
             </cascade>
         </one-to-many>
 
-        <one-to-many target-entity="SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Metadata" mapped-by="list_annotate" field="metadata">
+        <one-to-many target-entity="SimpleIT\ClaireExerciseBundle\Entity\Annotate\Metadata" mapped-by="list_annotate" field="metadata">
             <cascade>
                 <cascade-persist/>
                 <cascade-remove/>
