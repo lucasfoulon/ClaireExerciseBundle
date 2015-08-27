@@ -56,13 +56,17 @@
         <parameter key="simple_it.exercise.entity.resource_metadata.class">SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Metadata</parameter>
         <parameter key="simple_it.exercise.repository.resource_metadata.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\ExerciseResource\MetadataRepository</parameter>
 
+        <parameter key="simple_it.exercise.list_annotate.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\ListAnnotateService</parameter>
+        <parameter key="simple_it.exercise.entity.list_annotate.class">SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate</parameter>
+        <parameter key="simple_it.exercise.repository.list_annotate.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\ListAnnotateRepository</parameter>
+
         <parameter key="simple_it.exercise.annotate.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\AnnotateService</parameter>
         <parameter key="simple_it.exercise.entity.annotate.class">SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate</parameter>
         <parameter key="simple_it.exercise.repository.annotate.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateRepository</parameter>
 
-        <parameter key="simple_it.exercise.list_annotate.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\ListAnnotateService</parameter>
-        <parameter key="simple_it.exercise.entity.list_annotate.class">SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate</parameter>
-        <parameter key="simple_it.exercise.repository.list_annotate.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\ListAnnotateRepository</parameter>
+        <parameter key="simple_it.exercise.list_annotate_metadata.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\MetadataService</parameter>
+        <parameter key="simple_it.exercise.entity.list_annotate_metadata.class">SimpleIT\ClaireExerciseBundle\Entity\Annotate\Metadata</parameter>
+        <parameter key="simple_it.exercise.repository.list_annotate_metadata.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\MetadataRepository</parameter>
 
         <parameter key="simple_it.exercise.serializer.class">SimpleIT\ClaireExerciseBundle\Service\Serializer\Serializer</parameter>
     </parameters>
