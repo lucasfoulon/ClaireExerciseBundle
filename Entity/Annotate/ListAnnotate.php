@@ -10,14 +10,15 @@ namespace SimpleIT\ClaireExerciseBundle\Entity\Annotate;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
+use SimpleIT\ClaireExerciseBundle\Entity\SharedEntity\SharedEntity;
 
 
-class ListAnnotate
+class ListAnnotate extends SharedEntity
 {
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var ExerciseResource
@@ -27,7 +28,7 @@ class ListAnnotate
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var Collection
