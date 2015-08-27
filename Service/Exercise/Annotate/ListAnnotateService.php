@@ -35,6 +35,11 @@ class ListAnnotateService extends TransactionalService
     private $annotateService;
 
     /**
+     * @var MetadataService
+     */
+    private $metadataService;
+
+    /**
      * Set listAnnotateRepository
      *
      * @param ListAnnotateRepository $listAnnotateRepository
@@ -62,6 +67,16 @@ class ListAnnotateService extends TransactionalService
     public function setAnnotateService($annotateService)
     {
         $this->annotateService = $annotateService;
+    }
+
+    /**
+     * Set metadataService
+     *
+     * @param MetadataService $metadataService
+     */
+    public function setMetadataService($metadataService)
+    {
+        $this->metadataService = $metadataService;
     }
 
 
