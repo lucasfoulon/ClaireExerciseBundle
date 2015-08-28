@@ -46,6 +46,13 @@ class ListAnnotateResource
 
     /**
      * @var array
+     * @Serializer\Type("array")
+     * @Serializer\Groups({"details", "resource_list"})
+     */
+    protected $keywords;
+
+    /**
+     * @var array
      * @Serializer\Type("array<SimpleIT\ClaireExerciseBundle\Model\Resources\MetadataResource>")
      * @Serializer\Groups({"details", "resource_list"})
      */
@@ -129,5 +136,25 @@ class ListAnnotateResource
     public function getMetadata()
     {
         return $this->metadata;
+    }
+
+    /**
+     * Set keywords
+     *
+     * @param array $keywords
+     */
+    public function setKeywords($keywords)
+    {
+        $this->keywords = $keywords;
+    }
+
+    /**
+     * Get keywords
+     *
+     * @return array
+     */
+    public function getKeywords()
+    {
+        return $this->keywords;
     }
 }
