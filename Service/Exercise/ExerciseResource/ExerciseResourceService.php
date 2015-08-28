@@ -49,6 +49,7 @@ use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\SequenceResou
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\TextResource;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\KnowledgeResource;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\MetadataResource;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\MetadataResourceFactory;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ModelObject\ObjectConstraints;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ModelObject\ObjectId;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ResourceResource;
@@ -279,6 +280,15 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
 
                     $metadata = array();
                     $resMetadata = $resListAnnotateUni->getMetadata();
+                    $resKeywords = $resListAnnotateUni->getKeywords();
+
+                    // add keywords if any
+                    if (!empty($resKeywords)) {
+                        $resMetadata[] = MetadataResourceFactory::createFromKeyValue(
+                            MetadataResource::MISC_METADATA_KEY,
+                            implode(';', $resKeywords)
+                        );
+                    }
 
                     if (!empty($resMetadata)) {
                         foreach ($resMetadata as $resMetaD) {
