@@ -819,6 +819,33 @@
 
                         <div class="panel panel-success">
                             <div class="panel-heading">
+                                <h4>Mots-clés</h4>
+
+                                <div class="row">
+                                    <div ng-repeat="keyword in list_annotate.keywords track by $index">
+                                        <div class="col-xs-5">
+                                            <input type="text" ng-model="keyword" class="form-control" disabled>
+                                        </div>
+                                        <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.list_annotate[indexCollec].keywords, $index)"
+                                                                    class="glyphicon glyphicon-remove"
+                                                                    title="Supprimer ce mot-clé"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <input id="resourceListAnnotateAddKeyword" type="text" value=""
+                                               placeholder="nouveau mot-clé" class="form-control"></div>
+                                    <div class="col-xs-1"><span data-ng-click="resourceListAnnotateAddKeywordsField(editedResource.list_annotate[indexCollec].keywords)"
+                                                                class="glyphicon glyphicon-ok"
+                                                                title="Ajouter ce mot-clé"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
                                 <h4>Métadonnées</h4>
 
                                 <div class="row">

@@ -98,7 +98,6 @@ resourceControllers.controller('resourceController', ['$scope', '$modal',
                     "complete": null,
                     "metadata": [],
                     //TODO LUCAS
-                    "annotate": [],
                     "list_annotate": [],
                     //FIN TODO LUCAS
                     "keywords": [],
@@ -587,10 +586,16 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
             if(typeof $scope.editedResource.list_annotate == "undefined")
                 $scope.editedResource.list_annotate = new Array();
             var name = $("#resourceAddListAnnotate");
-            var newElement = {name: name[0].value, annotate: new Array()};
+            var newElement = {name: name[0].value, annotate: new Array(), metadata: new Array()};
             $scope.editedResource.list_annotate.push(newElement);
             name[0].value = '';
             console.log($scope.editedResource);
+        };
+
+        $scope.resourceListAnnotateAddKeywordsField = function (collection) {
+            var keyword = $("#resourceListAnnotateAddKeyword");
+            collection.push(keyword[0].value);
+            keyword[0].value = '';
         };
 
         $scope.resourceRemoveField = function (collection, index) {
