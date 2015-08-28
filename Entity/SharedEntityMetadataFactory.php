@@ -21,6 +21,7 @@ namespace SimpleIT\ClaireExerciseBundle\Entity;
 use SimpleIT\ClaireExerciseBundle\Entity\DomainKnowledge\Metadata as KnowledgeMetadata;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseModel\Metadata as ModelMetadata;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Metadata as ResourceMetadata;
+use SimpleIT\ClaireExerciseBundle\Entity\Annotate\Metadata as ListAnnotateMetadata;
 use SimpleIT\ClaireExerciseBundle\Entity\SharedEntity\Metadata;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\MetadataResource;
 
@@ -37,6 +38,8 @@ abstract class SharedEntityMetadataFactory
     const RESOURCE = 'resource';
 
     const KNOWLEDGE = 'knowledge';
+
+    const LIST_ANNOTATE = 'list_annotate';
 
     /**
      * Create a metadata
@@ -90,6 +93,8 @@ abstract class SharedEntityMetadataFactory
                 return new ResourceMetadata();
             case self::KNOWLEDGE:
                 return new KnowledgeMetadata();
+            case self::LIST_ANNOTATE:
+                return new ListAnnotateMetadata();
             default:
                 throw new \LogicException('Invalid type of entity:' . $entityType);
         }

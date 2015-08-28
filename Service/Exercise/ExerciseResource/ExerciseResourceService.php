@@ -26,6 +26,7 @@ use SimpleIT\ClaireExerciseBundle\Entity\DomainKnowledge\Knowledge;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\Metadata;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResourceFactory;
+use SimpleIT\ClaireExerciseBundle\Entity\SharedEntityMetadataFactory;
 use SimpleIT\ClaireExerciseBundle\Exception\Api\ApiNotFoundException;
 use SimpleIT\ClaireExerciseBundle\Exception\InconsistentEntityException;
 use SimpleIT\ClaireExerciseBundle\Exception\InvalidExerciseResourceException;
@@ -271,11 +272,34 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                 $lan->setAnnotate(new ArrayCollection($annotate));
                 //fin annotate
 
+                // meta list annotate
+                if (!is_null($resListAnnotateUni->getMetadata())) {
+
+                    //$lan->setMetadata($this->metadataAndKeyWords($resListAnnotateUni,$lan));
+
+                    $metadata = array();
+                    $resMetadata = $resListAnnotateUni->getMetadata();
+
+                    if (!empty($resMetadata)) {
+                        foreach ($resMetadata as $resMetaD) {
+                            $md = SharedEntityMetadataFactory::createFromResource(
+                                'list_annotate',
+                                $resMetaD
+                            );
+                            $md->setEntity($lan);
+                            $metadata[] = $md;
+                        }
+                    }
+
+                    $lan->setMetadata(new ArrayCollection($metadata));
+                }
+                //fin meta list annotate
+
                 $list_annotate[] = $lan;
             }
         }
         $exerciseResource->setListAnnotate(new ArrayCollection($list_annotate));
-        //fin  list annotate
+        //fin list annotate
 
         $exerciseResource = $this->computeRequirements($exerciseResource, $resourceResource);
 

@@ -116,6 +116,12 @@ class ListAnnotateService extends TransactionalService
     public function deleteAllByEntity($resource)
     {
         $this->annotateService->deleteAllByEntity($resource);
+        $listAnnotate= $resource->getListAnnotate();
+        if(!empty($listAnnotate)) {
+            foreach ($listAnnotate as $listAnnotateUni) {
+                $this->metadataService->deleteAllByEntity($listAnnotateUni);
+            }
+        }
         $this->listAnnotateRepository->deleteAllByEntity($resource);
         $this->em->flush();
     }
