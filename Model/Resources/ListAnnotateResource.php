@@ -22,6 +22,14 @@ class ListAnnotateResource
     const RESOURCE_NAME = 'ListAnnotate';
 
     /**
+     * @var int $id Id of list_annotate
+     * @Serializer\Type("integer")
+     * @Serializer\Groups({"details", "list", "resource_list"})
+     * @Assert\Blank(groups={"create","edit"})
+     */
+    protected $id;
+
+    /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\Groups({"list","details", "resource_list", "knowledge_list"})
@@ -49,6 +57,26 @@ class ListAnnotateResource
      * @Serializer\Groups({"details", "resource_list"})
      */
     protected $metadata;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Get name
