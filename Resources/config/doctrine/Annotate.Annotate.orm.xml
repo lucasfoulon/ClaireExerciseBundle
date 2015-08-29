@@ -2,14 +2,19 @@
                           http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate" table="claire_exercise_resource_annotate"  repository-class="SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateRepository">
 
-        <id name="list_annotate_id" association-key="true"/>
+        <id name="list_annotate" association-key="true"/>
+        <id name="resource" association-key="true"/>
         <id name="start" column="annotate_start" type="integer" nullable="false"/>
-        <id  name="end" column="annotate_end" type="integer" nullable="false"/>
+        <id name="end" column="annotate_end" type="integer" nullable="false"/>
 
         <field name="value" column="annotate_value" type="string" nullable="false"/>
 
         <many-to-one target-entity="SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate" field="list_annotate" inversed-by="annotate">
-            <join-column name="list_annotate_id" referenced-column-name="id"/>
+            <join-column name="list_annotate" referenced-column-name="list_annotate_name"/>
+        </many-to-one>
+
+        <many-to-one target-entity="SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource" field="resource" inversed-by="list_annotate">
+            <join-column name="resource" referenced-column-name="id"/>
         </many-to-one>
 
     </entity>
