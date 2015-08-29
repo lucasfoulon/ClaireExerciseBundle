@@ -18,6 +18,8 @@
 
 namespace SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate;
 
+use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
+use SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\MetadataRepository;
 use SimpleIT\ClaireExerciseBundle\Service\Exercise\SharedEntity\SharedMetadataService;
 
 /**
@@ -27,5 +29,22 @@ use SimpleIT\ClaireExerciseBundle\Service\Exercise\SharedEntity\SharedMetadataSe
  */
 class MetadataService extends SharedMetadataService
 {
-    const ENTITY_NAME = 'list_annotate';
+    const ENTITY_NAME = 'resource';
+
+    /**
+     * @var MetadataRepository
+     */
+    protected $metadataRepository;
+
+    /**
+     * Delete all the metadata for an owner resource
+     *
+     * @param ExerciseResource $entity
+     */
+    public function deleteAllByResource($entity)
+    {
+        $this->metadataRepository->deleteAllByResource($entity);
+        $this->em->flush();
+    }
+
 }

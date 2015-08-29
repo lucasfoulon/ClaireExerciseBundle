@@ -65,9 +65,9 @@ class AnnotateRepository extends BaseRepository
         if (count($entity->getListAnnotate()) > 0) {
             $list = $entity->getListAnnotate();
             $qb = $this->createQueryBuilder('a');
-            //$list_annotate->getResource()->getId();
             $qb->delete(get_class($list[0]->getAnnotate()[0]), 'a');
             $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
+            //$qb->andWhere($qb->expr()->eq('a.list_annotate', $list[0]->getName()));
             $qb->getQuery()->getResult();
 
 

@@ -290,12 +290,11 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
 
                     if (!empty($resMetadata)) {
                         foreach ($resMetadata as $resMetaD) {
-                            $md = SharedEntityMetadataFactory::createFromResource(
-                                'list_annotate',
-                                $resMetaD
-                            );
+                            $md = new \SimpleIT\ClaireExerciseBundle\Entity\Annotate\Metadata();
+                            $md->setKey($resMetaD->getKey());
+                            $md->setValue($resMetaD->getValue());
                             $md->setEntity($lan);
-                            $md->setResource($an);
+                            $md->setResource($exerciseResource);
                             $metadata[] = $md;
                         }
                     }

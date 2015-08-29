@@ -18,6 +18,7 @@
 
 namespace SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate;
 
+use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Repository\Exercise\SharedEntity\SharedMetadataRepository;
 
 /**
@@ -29,8 +30,25 @@ class MetadataRepository extends SharedMetadataRepository
 {
     const METADATA_TABLE = 'claire_exercise_resource_list_annotate_metadata';
 
-    const ENTITY_ID_FIELD_NAME = 'list_annotate_id';
+    const ENTITY_ID_FIELD_NAME = 'resource_id';
 
-    const ENTITY_NAME = 'list_annotate';
+    const ENTITY_NAME = 'resource';
 
+
+    /**
+     * Delete all the metadata for an entity
+     *
+     * @param ExerciseResource $entity
+     */
+    public function deleteAllByResource($entity)
+    {
+        if (count($entity->getListAnnotate()) > 0) {
+            $list = $entity->getListAnnotate();
+            $qb = $this->createQueryBuilder('m');
+            $qb->delete(get_class($list[0]->getMetadata()[0]), 'm');
+            $qb->where($qb->expr()->eq('m.resource', $entity->getId()));
+            $qb->getQuery()->getResult();
+
+        }
+    }
 }
