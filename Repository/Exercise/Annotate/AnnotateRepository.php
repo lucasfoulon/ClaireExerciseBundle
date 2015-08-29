@@ -8,6 +8,7 @@
 
 namespace SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate;
 
+use SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate;
 use SimpleIT\ClaireExerciseBundle\Entity\CreatedExercise\Attempt;
 use SimpleIT\ClaireExerciseBundle\Entity\CreatedExercise\Item;
 use SimpleIT\ClaireExerciseBundle\Entity\CreatedExercise\StoredExercise;
@@ -63,32 +64,25 @@ class AnnotateRepository extends BaseRepository
     public function deleteAllByEntity($entity)
     {
         if (count($entity->getListAnnotate()) > 0) {
-            $list = $entity->getListAnnotate();
-            $qb = $this->createQueryBuilder('a');
-            $qb->delete(get_class($list[0]->getAnnotate()[0]), 'a');
-            $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
-            //$qb->andWhere($qb->expr()->eq('a.list_annotate', $list[0]->getName()));
-            $qb->getQuery()->getResult();
-
-
-            /*foreach($entity->getListAnnotate() as $list_annotate) {
-               $this->deleteAllByListAnnotate($list_annotate);
-            }*/
+            foreach($entity->getListAnnotate() as $list_annotate) {
+               $this->deleteAllByListAnnotate($entity,$list_annotate);
+            }
         }
     }
 
     /**
      * Delete all the annotate for an list annotate
      *
+     * @param ExerciseResource $entity
      * @param ListAnnotate $list_annotate
      */
-    public function deleteAllByListAnnotate($list_annotate)
+    public function deleteAllByListAnnotate($entity,$list_annotate)
     {
         if (count($list_annotate->getAnnotate()) > 0) {
             $qb = $this->createQueryBuilder('a');
-            //$list_annotate->getResource()->getId();
             $qb->delete(get_class($list_annotate->getAnnotate()[0]), 'a');
-            $qb->where($qb->expr()->eq('a.list_annotate', $list_annotate->getName()));
+            $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
+            $qb->andWhere($qb->expr()->eq('a.list_annotate', '\''.$list_annotate->getName().'\''));
             $qb->getQuery()->getResult();
         }
     }

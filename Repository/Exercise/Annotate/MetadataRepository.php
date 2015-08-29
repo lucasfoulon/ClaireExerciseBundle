@@ -18,6 +18,7 @@
 
 namespace SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate;
 
+use SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Repository\Exercise\SharedEntity\SharedMetadataRepository;
 
@@ -43,12 +44,26 @@ class MetadataRepository extends SharedMetadataRepository
     public function deleteAllByResource($entity)
     {
         if (count($entity->getListAnnotate()) > 0) {
-            $list = $entity->getListAnnotate();
-            $qb = $this->createQueryBuilder('m');
-            $qb->delete(get_class($list[0]->getMetadata()[0]), 'm');
-            $qb->where($qb->expr()->eq('m.resource', $entity->getId()));
-            $qb->getQuery()->getResult();
+            foreach($entity->getListAnnotate() as $list_annotate) {
+                $this->deleteAllByListAnnotate($entity,$list_annotate);
+            }
+        }
+    }
 
+    /**
+     * Delete all the annotate for an list annotate
+     *
+     * @param ExerciseResource $entity
+     * @param ListAnnotate $list_annotate
+     */
+    public function deleteAllByListAnnotate($entity,$list_annotate)
+    {
+        if (count($list_annotate->getMetadata()) > 0) {
+            $qb = $this->createQueryBuilder('a');
+            $qb->delete(get_class($list_annotate->getMetadata()[0]), 'a');
+            $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
+            $qb->andWhere($qb->expr()->eq('a.list_annotate', '\''.$list_annotate->getName().'\''));
+            $qb->getQuery()->getResult();
         }
     }
 }
