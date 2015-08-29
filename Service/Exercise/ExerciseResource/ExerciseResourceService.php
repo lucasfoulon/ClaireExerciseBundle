@@ -252,7 +252,6 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                 $lan = new ListAnnotate();
                 $lan->setName($resListAnnotateUni->getName());
                 $lan->setResource($exerciseResource);
-                $lan->setId($resListAnnotateUni->getId());
                 //$lan->setAnnotate($resListAnnotateUni->getAnnotate());
 
                 //annotate
@@ -264,7 +263,6 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                         $an = new Annotate();
                         $an->setValue($resAnnotateUni->getValue());
                         $an->setListAnnotate($lan);
-                        //$an->setId($resAnnotateUni->getId());
                         $an->setResource($exerciseResource);
                         $an->setStart($resAnnotateUni->getStart());
                         $an->setEnd($resAnnotateUni->getEnd());

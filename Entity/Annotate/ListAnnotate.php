@@ -15,10 +15,6 @@ use SimpleIT\ClaireExerciseBundle\Entity\SharedEntity\SharedEntity;
 
 class ListAnnotate extends SharedEntity
 {
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var ExerciseResource
@@ -41,26 +37,6 @@ class ListAnnotate extends SharedEntity
     public function __construct()
     {
         $this->annotate = new ArrayCollection();
-    }
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set id
-     *
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
