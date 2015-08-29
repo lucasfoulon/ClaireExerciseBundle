@@ -8,6 +8,7 @@
 
 namespace SimpleIT\ClaireExerciseBundle\Entity\Annotate;
 
+use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Entity\SharedEntity\Metadata as BaseMetadata;
 
 /**
@@ -21,11 +22,16 @@ class Metadata extends BaseMetadata
     private $list_annotate;
 
     /**
+     * @var ExerciseResource
+     */
+    private $resource;
+
+    /**
      * Set list_annotate
      *
      * @param ListAnnotate $list_annotate
      */
-    public function setResource($list_annotate)
+    public function setListAnnotate($list_annotate)
     {
         $this->list_annotate = $list_annotate;
     }
@@ -35,7 +41,7 @@ class Metadata extends BaseMetadata
      *
      * @return ListAnnotate
      */
-    public function getResource()
+    public function getListAnnotate()
     {
         return $this->list_annotate;
     }
@@ -48,5 +54,25 @@ class Metadata extends BaseMetadata
     public function setEntity($entity)
     {
         $this->list_annotate = $entity;
+    }
+
+    /**
+     * Set resource
+     *
+     * @param ExerciseResource $resource
+     */
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
+    }
+
+    /**
+     * Get resource
+     *
+     * @return ExerciseResource
+     */
+    public function getResource()
+    {
+        return $this->resource;
     }
 }
