@@ -295,6 +295,7 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                             $md->setKey($resMetaD->getKey());
                             $md->setValue($resMetaD->getValue());
                             $md->setEntity($lan);
+                            $md->setListAnnotateName($lan->getName());
                             $md->setResource($exerciseResource);
                             $metadata[] = $md;
                         }

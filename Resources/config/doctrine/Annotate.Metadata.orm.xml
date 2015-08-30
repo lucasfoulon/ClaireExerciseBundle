@@ -4,6 +4,8 @@
 
         <id name="resource" association-key="true"/>
         <id name="key" type="string" column="meta_key"/>
+        <id name="list_annotate_name" column="meta_list_annotate_name" type="string" nullable="false"/>
+
         <field name="value" column="meta_value" type="string" nullable="false"/>
 
         <many-to-one target-entity="SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate" field="list_annotate" inversed-by="metadata">

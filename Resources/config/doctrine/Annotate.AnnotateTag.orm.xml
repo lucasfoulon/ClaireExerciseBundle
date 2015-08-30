@@ -24,7 +24,7 @@
             <join-columns>
                 <join-column name="annotate_start" referenced-column-name="annotate_start" nullable="false"/>
                 <join-column name="annotate_end" referenced-column-name="annotate_end" nullable="false"/>
-                <join-column name="annotate_liste_annotate_name" referenced-column-name="annotate_list_annotate_name" nullable="false"/>
+                <join-column name="annotate_list_annotate_name" referenced-column-name="annotate_list_annotate_name" nullable="false"/>
                 <join-column name="annotate_list_annotate_resource_id" referenced-column-name="resource_id" nullable="false"/>
             </join-columns>
         </many-to-one>

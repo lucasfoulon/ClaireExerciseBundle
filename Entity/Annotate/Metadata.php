@@ -27,6 +27,11 @@ class Metadata extends BaseMetadata
     private $resource;
 
     /**
+     * @var string
+     */
+    private $list_annotate_name;
+
+    /**
      * Set list_annotate
      *
      * @param ListAnnotate $list_annotate
@@ -74,5 +79,25 @@ class Metadata extends BaseMetadata
     public function getResource()
     {
         return $this->resource;
+    }
+
+    /**
+     * Get list_annotate_name
+     *
+     * @return string
+     */
+    public function getListAnnotateName()
+    {
+        return $this->list_annotate_name;
+    }
+
+    /**
+     * Set list_annotate_name
+     *
+     * @param string $list_annotate_name
+     */
+    public function setListAnnotateName($list_annotate_name)
+    {
+        $this->list_annotate_name = $list_annotate_name;
     }
 }
