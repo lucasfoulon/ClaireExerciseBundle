@@ -3,6 +3,7 @@
     <entity name="SimpleIT\ClaireExerciseBundle\Entity\Annotate\AnnotateTag" table="claire_exercise_resource_annotate_tag" repository-class="SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateTagRepository">
 
         <id name="resource" association-key="true"/>
+        <id name="list_annotate_name" column="tag_list_annotate_name" type="string" nullable="false"/>
         <id name="key" type="string" column="tag_key"/>
         <id name="start" column="annotate_tag_start" type="integer" nullable="false"/>
         <id name="end" column="annotate_tag_end" type="integer" nullable="false"/>

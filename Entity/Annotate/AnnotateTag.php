@@ -28,6 +28,11 @@ class AnnotateTag {
     private $annotate;
 
     /**
+     * @var string
+     */
+    private $list_annotate_name;
+
+    /**
      * @var int
      */
     private $start;
@@ -185,6 +190,26 @@ class AnnotateTag {
     public function setEnd($end)
     {
         $this->end = $end;
+    }
+
+    /**
+     * Get list_annotate_name
+     *
+     * @return string
+     */
+    public function getListAnnotateName()
+    {
+        return $this->list_annotate_name;
+    }
+
+    /**
+     * Set list_annotate_name
+     *
+     * @param string $list_annotate_name
+     */
+    public function setListAnnotateName($list_annotate_name)
+    {
+        $this->list_annotate_name = $list_annotate_name;
     }
 
 }
