@@ -142,4 +142,24 @@ class Annotate
     {
         $this->end = $end;
     }
+
+    /**
+     * Set annotate_tag
+     *
+     * @param \Doctrine\Common\Collections\Collection $annotate_tag
+     */
+    public function setAnnotateTag($annotate_tag)
+    {
+        $this->annotate_tag = $annotate_tag;
+    }
+
+    /**
+     * Get annotate_tag
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAnnotateTag()
+    {
+        return $this->annotate_tag;
+    }
 }
