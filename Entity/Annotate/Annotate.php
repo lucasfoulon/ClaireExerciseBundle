@@ -39,6 +39,11 @@ class Annotate
     private $end;
 
     /**
+     * @var Collection
+     */
+    protected $annotate_tag;
+
+    /**
      * Set list_annotate
      *
      * @param ListAnnotate $list_annotate
