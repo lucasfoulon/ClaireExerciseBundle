@@ -1,0 +1,29 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="SimpleIT\ClaireExerciseBundle\Entity\Annotate\AnnotateTag" table="claire_exercise_resource_annotate_tag" repository-class="SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateTagRepository">
+
+        <id name="resource_id" association-key="true"/>
+        <id name="list_annotate_name" association-key="true"/>
+        <id name="annotate_start" association-key="true"/>
+        <id name="annotate_end" association-key="true"/>
+        <id name="key" type="string" column="meta_key"/>
+
+        <field name="value" column="meta_value" type="string" nullable="true"/>
+
+        <many-to-one target-entity="SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource" field="resource" inversed-by="list_annotate">
+            <join-column name="resource_id" referenced-column-name="id"/>
+        </many-to-one>
+
+        <many-to-one target-entity="SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate" field="list_annotate" inversed-by="metadata">
+            <join-column name="list_annotate_name" referenced-column-name="list_annotate_name"/>
+        </many-to-one>
+
+        <many-to-one target-entity="SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate" field="annotate" inversed-by="annotate_tag">
+            <join-columns>
+                <join-column name="annotate_start" referenced-column-name="start"/>
+                <join-column name="annotate_end" referenced-column-name="end"/>
+            </join-columns>
+        </many-to-one>
+
+    </entity>
+</doctrine-mapping>
