@@ -26,6 +26,11 @@ class Annotate
     /**
      * @var string
      */
+    private $list_annotate_name;
+
+    /**
+     * @var string
+     */
     private $value;
 
     /**
@@ -161,5 +166,25 @@ class Annotate
     public function getAnnotateTag()
     {
         return $this->annotate_tag;
+    }
+
+    /**
+     * Get list_annotate_name
+     *
+     * @return string
+     */
+    public function getListAnnotateName()
+    {
+        return $this->list_annotate_name;
+    }
+
+    /**
+     * Set list_annotate_name
+     *
+     * @param string $list_annotate_name
+     */
+    public function setListAnnotateName($list_annotate_name)
+    {
+        $this->list_annotate_name = $list_annotate_name;
     }
 }

@@ -3,7 +3,6 @@
     <entity name="SimpleIT\ClaireExerciseBundle\Entity\Annotate\AnnotateTag" table="claire_exercise_resource_annotate_tag" repository-class="SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateTagRepository">
 
         <id name="resource" association-key="true"/>
-        <id name="list_annotate" association-key="true"/>
         <id name="key" type="string" column="tag_key"/>
         <id name="start" column="annotate_tag_start" type="integer" nullable="false"/>
         <id name="end" column="annotate_tag_end" type="integer" nullable="false"/>
@@ -15,13 +14,18 @@
         </many-to-one>
 
         <many-to-one target-entity="SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate" field="list_annotate" inversed-by="annotate">
-            <join-column name="list_annotate_name" referenced-column-name="list_annotate_name" nullable="false"/>
+            <join-columns>
+                <join-column name="list_annotate_name" referenced-column-name="list_annotate_name" nullable="false"/>
+                <join-column name="list_annotate_resource_id" referenced-column-name="resource_id" nullable="false"/>
+            </join-columns>
         </many-to-one>
 
         <many-to-one target-entity="SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate" field="annotate" inversed-by="annotate_tag">
             <join-columns>
                 <join-column name="annotate_start" referenced-column-name="annotate_start" nullable="false"/>
                 <join-column name="annotate_end" referenced-column-name="annotate_end" nullable="false"/>
+                <join-column name="annotate_liste_annotate_name" referenced-column-name="annotate_list_annotate_name" nullable="false"/>
+                <join-column name="annotate_list_annotate_resource_id" referenced-column-name="resource_id" nullable="false"/>
             </join-columns>
         </many-to-one>
 

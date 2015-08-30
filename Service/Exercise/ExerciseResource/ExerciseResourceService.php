@@ -262,6 +262,7 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                         $an = new Annotate();
                         $an->setValue($resAnnotateUni->getValue());
                         $an->setListAnnotate($lan);
+                        $an->setListAnnotateName($lan->getName());
                         $an->setResource($exerciseResource);
                         $an->setStart($resAnnotateUni->getStart());
                         $an->setEnd($resAnnotateUni->getEnd());
