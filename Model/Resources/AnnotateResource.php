@@ -127,7 +127,7 @@ class AnnotateResource
      *
      * @return array
      */
-    public function getAnnotate()
+    public function getAnnotateTag()
     {
         return $this->annotate_tag;
     }

@@ -21,6 +21,7 @@ namespace SimpleIT\ClaireExerciseBundle\Service\Exercise\ExerciseResource;
 use Claroline\CoreBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate;
+use SimpleIT\ClaireExerciseBundle\Entity\Annotate\AnnotateTag;
 use SimpleIT\ClaireExerciseBundle\Entity\Annotate\ListAnnotate;
 use SimpleIT\ClaireExerciseBundle\Entity\DomainKnowledge\Knowledge;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
@@ -266,6 +267,25 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                         $an->setResource($exerciseResource);
                         $an->setStart($resAnnotateUni->getStart());
                         $an->setEnd($resAnnotateUni->getEnd());
+
+                        //tag annotate
+                        $annotate_tag = array();
+                        $resAnnotateTag= $resAnnotateUni->getAnnotateTag();
+                        if(!empty($resAnnotateTag)) {
+                            foreach ($resAnnotateTag as $resAnnotateTagUni) {
+                                $ant = new AnnotateTag();
+                                $ant->setKey($resAnnotateTagUni->getKey());
+                                $ant->setValue($resAnnotateTagUni->getValue());
+                                $ant->setAnnotate($an);
+                                $ant->setListAnnotate($lan);
+                                $ant->setResource($exerciseResource);
+                                $ant->setStart($resAnnotateUni->getStart());
+                                $ant->setEnd($resAnnotateUni->getEnd());
+                                $ant->setListAnnotateName($lan->getName());
+                            }
+                        }
+                        //fin tag annotate
+
                         $annotate[] = $an;
                     }
                 }
