@@ -47,6 +47,16 @@ abstract class AnnotateResourceFactory
         $annotateResource->setStart($annotate->getStart());
         $annotateResource->setEnd($annotate->getEnd());
 
+        // annotateTag
+        $annotateTagArray = array();
+        /** @var AnnotateTag $an */
+        foreach ($annotate->getAnnotateTag() as $ant) {
+            $annotateTagArray[] = AnnotateTagResourceFactory::create(
+                $ant
+            );
+        }
+        $annotateResource->setAnnotateTag($annotateTagArray);
+
         return $annotateResource;
     }
 

@@ -8,6 +8,8 @@
 namespace SimpleIT\ClaireExerciseBundle\Entity\Annotate;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 
 class Annotate
@@ -47,6 +49,14 @@ class Annotate
      * @var Collection
      */
     protected $annotate_tag;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->annotate_tag = new ArrayCollection();
+    }
 
     /**
      * Set list_annotate

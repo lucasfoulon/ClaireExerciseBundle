@@ -22,14 +22,6 @@ class AnnotateResource
     const RESOURCE_NAME = 'Annotate';
 
     /**
-     * @var int $id Id of annotate
-     * @Serializer\Type("integer")
-     * @Serializer\Groups({"details", "list", "resource_list"})
-     * @Assert\Blank(groups={"create","edit"})
-     */
-    protected $id;
-
-    /**
      * @var string
      * @Serializer\Type("string")
      * @Serializer\Groups({"list","details", "resource_list", "knowledge_list"})
@@ -54,24 +46,11 @@ class AnnotateResource
     protected $end;
 
     /**
-     * Get id
-     *
-     * @return int
+     * @var array
+     * @Serializer\Type("array<SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateTagResource>")
+     * @Serializer\Groups({"details", "resource_list"})
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set id
-     *
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
+    protected $annotate_tag;
 
     /**
      * Get value
@@ -131,5 +110,25 @@ class AnnotateResource
     public function setEnd($end)
     {
         $this->end = $end;
+    }
+
+    /**
+     * Set annotateTag
+     *
+     * @param array $annotate_tag
+     */
+    public function setAnnotateTag($annotate_tag)
+    {
+        $this->annotate_tag = $annotate_tag;
+    }
+
+    /**
+     * Get annotateTag
+     *
+     * @return array
+     */
+    public function getAnnotate()
+    {
+        return $this->annotate_tag;
     }
 }
