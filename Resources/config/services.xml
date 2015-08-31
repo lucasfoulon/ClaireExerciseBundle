@@ -68,6 +68,10 @@
         <parameter key="simple_it.exercise.entity.list_annotate_metadata.class">SimpleIT\ClaireExerciseBundle\Entity\Annotate\Metadata</parameter>
         <parameter key="simple_it.exercise.repository.list_annotate_metadata.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\MetadataRepository</parameter>
 
+        <parameter key="simple_it.exercise.annotate_tag.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\AnnotateTagService</parameter>
+        <parameter key="simple_it.exercise.entity.annotate_tag.class">SimpleIT\ClaireExerciseBundle\Entity\Annotate\AnnotateTag</parameter>
+        <parameter key="simple_it.exercise.repository.annotate_tag.class">SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateTagRepository</parameter>
+
         <parameter key="simple_it.exercise.serializer.class">SimpleIT\ClaireExerciseBundle\Service\Serializer\Serializer</parameter>
     </parameters>
 
