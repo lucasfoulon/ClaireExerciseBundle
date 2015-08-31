@@ -598,6 +598,15 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
             keyword[0].value = '';
         };
 
+        $scope.resourceAnnotateAddTagField = function (collection) {
+            var keyword = $("#resourceAnnotateAddTagKey");
+            var value = $("#resourceAnnotateAddTagValue");
+            $annotateAddTag = {key: keyword[0].value, value: value[0].value};
+            collection.push($annotateAddTag);
+            keyword[0].value = '';
+            value[0].value = '';
+        };
+
         $scope.resourceRemoveField = function (collection, index) {
             collection.splice(index, 1);
         };

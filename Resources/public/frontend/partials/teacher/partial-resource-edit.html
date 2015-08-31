@@ -786,7 +786,7 @@
                         <accordion-heading class="panel-heading">
                             <div class="row" data-ng-click="choiceListAnnotate(editedResource.list_annotate, $index)">
                                 <div class="col-xs-5">
-                                    <span class="glyphicon glyphicon-th-list"></span>&nbsp;Nom de la liste : {{list_annotate.name}}&nbsp;<span class="caret"></span>
+                                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;Nom de la liste : {{list_annotate.name}}&nbsp;<span class="caret"></span>
                                 </div>
                                 <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.list_annotate, $index)"
                                                             class="glyphicon glyphicon-remove"
@@ -797,25 +797,57 @@
 
                         <data ng-init="indexCollec= $index"/>
 
-                        <div class="row">
-                            <div id="viewAnnotateForResource">
-                                <div ng-repeat="annotate in list_annotate.annotate track by $index">
-                                    <div class="col-xs-8">
-                                        <input type="text" ng-model="annotate.value" class="form-control" disabled>
+                        <accordion close-others="true" class="row center-block">
+                                <accordion-group class="panel panel-default" ng-repeat="annotate in list_annotate.annotate track by $index">
+                                    <accordion-heading class="panel-heading">
+                                        <div class="row" id="viewAnnotateForResource">
+                                            <div class="col-xs-8">
+                                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;Annotation n°{{$index+1}} : {{annotate.value}}&nbsp;<span class="caret"></span>
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <span></span>&nbsp;{{annotate.start}}&nbsp;<span></span>
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <span></span>&nbsp;{{annotate.end}}&nbsp;<span></span>
+                                            </div>
+                                            <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.list_annotate[indexCollec].annotate, $index)"
+                                                                        class="glyphicon glyphicon-remove"
+                                                                        title="Supprimer cette annotation"></span>
+                                            </div>
+                                        </div>
+                                    </accordion-heading>
+
+                                    <data ng-init="indexAnnotate= $index"/>
+                                    <h4>Tag</h4>
+
+                                    <div class="row">
+                                        <div ng-repeat="tag in annotate.annotate_tag track by $index">
+                                            <div class="col-xs-5">
+                                                <input type="text" ng-model="tag.key" class="form-control" disabled>
+                                            </div>
+                                            <div class="col-xs-5">
+                                                <input type="text" ng-model="tag.value" class="form-control" disabled>
+                                            </div>
+                                            <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.list_annotate[indexCollec].annotate[indexAnnotate].annotate_tag, $index)"
+                                                                        class="glyphicon glyphicon-remove"
+                                                                        title="Supprimer ce mot-clé"></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-1">
-                                        <input type="text" ng-model="annotate.start" class="form-control" disabled>
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <input id="resourceAnnotateAddTagKey" type="text" value=""
+                                                   placeholder="nouveau mot-clé" class="form-control"></div>
+                                        <div class="col-xs-5">
+                                            <input id="resourceAnnotateAddTagValue" type="text" value=""
+                                            placeholder="valeur du nouveau mot-clé" class="form-control"></div>
+                                        <div class="col-xs-1"><span data-ng-click="resourceAnnotateAddTagField(editedResource.list_annotate[indexCollec].annotate[indexAnnotate].annotate_tag)"
+                                                                    class="glyphicon glyphicon-ok"
+                                                                    title="Ajouter ce mot-clé"></span>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-1">
-                                        <input type="text" ng-model="annotate.end" class="form-control" disabled>
-                                    </div>
-                                    <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.list_annotate[indexCollec].annotate, $index)"
-                                                                class="glyphicon glyphicon-remove"
-                                                                title="Supprimer cette annotation"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </accordion-group>
+                        </accordion>
 
                         <div class="panel panel-success">
                             <div class="panel-heading">
