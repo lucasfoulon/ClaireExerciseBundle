@@ -31,10 +31,9 @@ class AnnotateTagRepository extends BaseRepository
     public function deleteAllByEntity($entity)
     {
         if (count($entity->getListAnnotate()) > 0) {
-            //foreach($entity->getListAnnotate() as $list_annotate) {
-            //$this->deleteAllByListAnnotate($entity,$list_annotate);
-            //}
-            $this->deleteAllByListAnnotate($entity);
+            foreach($entity->getListAnnotate() as $list_annotate) {
+                $this->deleteAllByListAnnotate($entity,$list_annotate);
+            }
         }
     }
 
@@ -42,23 +41,17 @@ class AnnotateTagRepository extends BaseRepository
      * Delete all the annotate tag for an list annotate
      *
      * @param ExerciseResource $entity
+     * @param ListAnnotate $list_annotate
+     *
      */
-    public function deleteAllByListAnnotate($entity)
+    public function deleteAllByListAnnotate($entity,$list_annotate)
     {
-        $var_test = false;
-        $var_list_annotate = null;
-        foreach($entity->getListAnnotate() as $list_annotate) {
-            if (count($list_annotate->getAnnotate()) > 0) {
-                foreach($list_annotate->getAnnotate() as $annotate) {
-                    if (count($annotate->getAnnotateTag()) > 0) {
-                        $var_annotate = $annotate;
-                        $var_test = true;
-                    }
+        if (count($list_annotate->getAnnotate()) > 0) {
+            foreach($list_annotate->getAnnotate() as $annotate) {
+                if (count($annotate->getAnnotateTag()) > 0) {
+                    $this->deleteAllByAnnotate($entity,$list_annotate,$annotate);
                 }
             }
-        }
-        if ($var_test) {
-            $this->deleteAllByListAnnotate($entity,$var_annotate);
         }
     }
 
@@ -66,14 +59,18 @@ class AnnotateTagRepository extends BaseRepository
      * Delete all the annotate tag for an annotate
      *
      * @param ExerciseResource $entity
+     * @param ListAnnotate $list_annotate
      * @param Annotate $annotate
      */
-    public function deleteAllByAnnotate($entity,$annotate)
+    public function deleteAllByAnnotate($entity,$list_annotate,$annotate)
     {
         if (count($annotate->getAnnotateTag()) > 0) {
             $qb = $this->createQueryBuilder('at');
             $qb->delete(get_class($annotate->getAnnotateTag()[0]), 'at');
             $qb->where($qb->expr()->eq('at.resource', $entity->getId()));
+            $qb->andWhere($qb->expr()->eq('at.list_annotate_name', '\''.$list_annotate->getName()).'\'');
+            $qb->andWhere($qb->expr()->eq('at.start', '\''.$annotate->getStart()).'\'');
+            $qb->andWhere($qb->expr()->eq('at.end', '\''.$annotate->getEnd()).'\'');
             $qb->getQuery()->getResult();
         }
     }

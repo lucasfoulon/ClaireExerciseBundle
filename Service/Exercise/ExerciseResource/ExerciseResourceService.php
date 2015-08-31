@@ -282,8 +282,11 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
                                 $ant->setStart($resAnnotateUni->getStart());
                                 $ant->setEnd($resAnnotateUni->getEnd());
                                 $ant->setListAnnotateName($lan->getName());
+
+                                $annotate_tag[] = $ant;
                             }
                         }
+                        $an->setAnnotateTag(new ArrayCollection($annotate_tag));
                         //fin tag annotate
 
                         $annotate[] = $an;

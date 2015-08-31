@@ -64,10 +64,9 @@ class AnnotateRepository extends BaseRepository
     public function deleteAllByEntity($entity)
     {
         if (count($entity->getListAnnotate()) > 0) {
-            //foreach($entity->getListAnnotate() as $list_annotate) {
-               //$this->deleteAllByListAnnotate($entity,$list_annotate);
-            //}
-            $this->deleteAllByListAnnotate($entity);
+            foreach($entity->getListAnnotate() as $list_annotate) {
+                $this->deleteAllByListAnnotate($entity,$list_annotate);
+            }
         }
     }
 
@@ -75,15 +74,15 @@ class AnnotateRepository extends BaseRepository
      * Delete all the annotate for an list annotate
      *
      * @param ExerciseResource $entity
+     * @param ListAnnotate $list_annotate
      */
-    public function deleteAllByListAnnotate($entity)
+    public function deleteAllByListAnnotate($entity,$list_annotate)
     {
-        $list_annotate = $entity->getListAnnotate()[0];
         if (count($list_annotate->getAnnotate()) > 0) {
             $qb = $this->createQueryBuilder('a');
             $qb->delete(get_class($list_annotate->getAnnotate()[0]), 'a');
             $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
-            //$qb->andWhere($qb->expr()->eq('a.list_annotate_name', '\''.$list_annotate->getName().'\''));
+            $qb->andWhere($qb->expr()->eq('a.list_annotate_name', '\''.$list_annotate->getName().'\''));
             $qb->getQuery()->getResult();
         }
     }
