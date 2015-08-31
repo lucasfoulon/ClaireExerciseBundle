@@ -505,9 +505,14 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
             delete newResource.required_knowledges;
             delete newResource.complete_error;
 
+            //Pour se souvenir de la liste d'annotation ouverte
+            $num_list_open = $scope.editedResource.numlistannotate;
+
             newResource.$update({id: $stateParams.resourceid}, function (resource) {
                 $scope.resources[resource.id] = resource;
                 $scope.editedResource = resource;
+
+                $scope.editedResource.numlistannotate = $num_list_open;
             });
         };
 
