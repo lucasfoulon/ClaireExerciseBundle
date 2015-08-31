@@ -8,6 +8,7 @@
 
 namespace SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate;
 
+use SimpleIT\ClaireExerciseBundle\Entity\ExerciseResource\ExerciseResource;
 use SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateRepository;
 use SimpleIT\ClaireExerciseBundle\Repository\Exercise\Annotate\AnnotateTagRepository;
 use SimpleIT\ClaireExerciseBundle\Service\TransactionalService;
@@ -40,9 +41,20 @@ class AnnotateTagService extends TransactionalService
      *
      * @param AnnotateService $annotateService
      */
-    public function setAnnotateTagService($annotateService)
+    public function setAnnotateService($annotateService)
     {
         $this->annotateService = $annotateService;
+    }
+
+    /**
+     * Delete all the annotate tag for an owner resource
+     *
+     * @param ExerciseResource $resource
+     */
+    public function deleteAllByEntity($resource)
+    {
+        $this->annotateTagRepository->deleteAllByEntity($resource);
+        $this->em->flush();
     }
 
 }

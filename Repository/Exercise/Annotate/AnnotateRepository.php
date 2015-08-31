@@ -75,7 +75,6 @@ class AnnotateRepository extends BaseRepository
      * Delete all the annotate for an list annotate
      *
      * @param ExerciseResource $entity
-     * @param ListAnnotate $list_annotate
      */
     public function deleteAllByListAnnotate($entity)
     {

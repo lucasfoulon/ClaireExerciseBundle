@@ -31,6 +31,11 @@ class AnnotateService extends TransactionalService
     protected $listAnnotateService;
 
     /**
+     * @var AnnotateTagService
+     */
+    private $annotateTagService;
+
+    /**
      * Set annotateRepository
      *
      * @param AnnotateRepository $annotateRepository
@@ -48,6 +53,16 @@ class AnnotateService extends TransactionalService
     public function setListAnnotateService($listAnnotateService)
     {
         $this->listAnnotateService = $listAnnotateService;
+    }
+
+    /**
+     * Set annotateTagService
+     *
+     * @param \SimpleIT\ClaireExerciseBundle\Service\Exercise\Annotate\AnnotateTagService $annotateTagService
+     */
+    public function setAnnotateTagService($annotateTagService)
+    {
+        $this->annotateTagService = $annotateTagService;
     }
 
 
@@ -87,6 +102,7 @@ class AnnotateService extends TransactionalService
      */
     public function deleteAllByEntity($resource)
     {
+        $this->annotateTagService->deleteAllByEntity($resource);
         $this->annotateRepository->deleteAllByEntity($resource);
         $this->em->flush();
     }
