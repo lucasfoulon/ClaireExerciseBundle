@@ -44,10 +44,9 @@ class MetadataRepository extends SharedMetadataRepository
     public function deleteAllByResource($entity)
     {
         if (count($entity->getListAnnotate()) > 0) {
-            //foreach($entity->getListAnnotate() as $list_annotate) {
-                //$this->deleteAllByListAnnotate($entity,$list_annotate);
-            //}
-            $this->deleteAllByListAnnotate($entity);
+            foreach($entity->getListAnnotate() as $list_annotate) {
+                $this->deleteAllByListAnnotate($entity,$list_annotate);
+            }
         }
     }
 
@@ -57,14 +56,13 @@ class MetadataRepository extends SharedMetadataRepository
      * @param ExerciseResource $entity
      * @param ListAnnotate $list_annotate
      */
-    public function deleteAllByListAnnotate($entity)
+    public function deleteAllByListAnnotate($entity,$list_annotate)
     {
-        $list_annotate = $entity->getListAnnotate()[0];
         if (count($list_annotate->getMetadata()) > 0) {
             $qb = $this->createQueryBuilder('a');
             $qb->delete(get_class($list_annotate->getMetadata()[0]), 'a');
             $qb->where($qb->expr()->eq('a.resource', $entity->getId()));
-            //$qb->andWhere($qb->expr()->eq('a.list_annotate', '\''.$list_annotate->getName().'\''));
+            $qb->andWhere($qb->expr()->eq('a.list_annotate_name', '\''.$list_annotate->getName().'\''));
             $qb->getQuery()->getResult();
         }
     }
