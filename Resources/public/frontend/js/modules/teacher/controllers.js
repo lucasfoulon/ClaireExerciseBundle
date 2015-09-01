@@ -1019,61 +1019,61 @@ modelControllers.controller('modelController', ['$scope', 'Exercise','Item', 'Ex
                             "excluded": []
                         }
                     }
-                }
-
                 },
-            "text_exercise": {
-                "type": "text-exercise",
-                "title": "Nouveau modèle d'exercice sur des textes",
-                "public": false,
-                "archived": false,
-                "draft": false,
-                "complete": null,
-                "metadata": [],
-                "keywords": [],
-                "content": {
-                    "wording": null,
-                    "documents": [],
-                    "text_blocks": [
-                        {
-                            "number_of_occurrences": 0,
-                            "resources": [],
-                            "is_list": true,
-                            "is_annotate": false,
-                            "resource_constraint": {
-                                "metadata_constraints": [],
-                                "excluded": []
-                            },
-                            "resource_annotate_constraint": {
-                                "metadata_constraints": [],
-                                "excluded": []
+                "text_exercise": {
+                    "type": "text-exercise",
+                    "title": "Nouveau modèle d'exercice sur des textes",
+                    "public": false,
+                    "archived": false,
+                    "draft": false,
+                    "complete": null,
+                    "metadata": [],
+                    "keywords": [],
+                    "content": {
+                        "wording": null,
+                        "documents": [],
+                        "text_blocks": [
+                            {
+                                "number_of_occurrences": 0,
+                                "resources": [],
+                                "is_list": true,
+                                "is_annotate": false,
+                                "resource_constraint": {
+                                    "metadata_constraints": [],
+                                    "excluded": []
+                                },
+                                "resource_annotate_constraint": {
+                                    "metadata_constraints": [],
+                                    "excluded": []
+                                }
                             }
-                        }
-                    ],
-                    "shuffle_questions_order": true,
-                    "exercise_model_type": "text-exercise"
-                },
-                "required_exercise_resources": null,
-                "required_knowledges": null
-            },
-            "sub_text_exercise": {
-                "block_field": {
-                    "number_of_occurrences": 0,
-                    "resources": [],
-                    "is_list": true,
-                    "is_annotate": false,
-                    "max_number_of_propositions": 0,
-                    "max_number_of_right_propositions": 0,
-                    "resource_constraint": {
-                        "metadata_constraints": [],
-                        "excluded": []
+                        ],
+                        "shuffle_questions_order": true,
+                        "exercise_model_type": "text-exercise"
                     },
-                    "resource_annotate_constraint": {
-                        "metadata_constraints": [],
-                        "excluded": []
+                    "required_exercise_resources": null,
+                    "required_knowledges": null
+                },
+                "sub_text_exercise": {
+                    "block_field": {
+                        "number_of_occurrences": 0,
+                        "resources": [],
+                        "is_list": true,
+                        "is_annotate": false,
+                        "max_number_of_propositions": 0,
+                        "max_number_of_right_propositions": 0,
+                        "resource_constraint": {
+                            "metadata_constraints": [],
+                            "excluded": []
+                        },
+                        "resource_annotate_constraint": {
+                            "metadata_constraints": [],
+                            "excluded": []
+                        }
                     }
                 }
-            }
+
+                }
 
         };
 
@@ -1565,7 +1565,7 @@ modelControllers.controller('modelListController', ['$scope', 'Model', '$locatio
             });
             }
             else if ( type == 'text-exercise'){
-                Model.save($scope.modelContext.newModel.test_exercise, function (data) {
+                Model.save($scope.modelContext.newModel.text_exercise, function (data) {
                 $location.path('/teacher/model/' + data.id)
             });
             }
