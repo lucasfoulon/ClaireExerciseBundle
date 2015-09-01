@@ -830,20 +830,20 @@
                                             </div>
                                             <div class="col-xs-1"><span data-ng-click="removeFromCollection(editedResource.list_annotate[indexCollec].annotate[indexAnnotate].annotate_tag, $index)"
                                                                         class="glyphicon glyphicon-remove"
-                                                                        title="Supprimer ce mot-clé"></span>
+                                                                        title="Supprimer ce tag"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-5">
-                                            <input id="resourceAnnotateAddTagKey" type="text" value=""
+                                            <input id="resourceAnnotateAddTagKey-{{indexCollec}}-{{indexAnnotate}}" type="text" value=""
                                                    placeholder="nouveau mot-clé" class="form-control"></div>
                                         <div class="col-xs-5">
-                                            <input id="resourceAnnotateAddTagValue" type="text" value=""
+                                            <input id="resourceAnnotateAddTagValue-{{indexCollec}}-{{indexAnnotate}}" type="text" value=""
                                             placeholder="valeur du nouveau mot-clé" class="form-control"></div>
-                                        <div class="col-xs-1"><span data-ng-click="resourceAnnotateAddTagField(editedResource.list_annotate[indexCollec].annotate[indexAnnotate].annotate_tag)"
+                                        <div class="col-xs-1"><span data-ng-click="resourceAnnotateAddTagField(editedResource.list_annotate[indexCollec].annotate[indexAnnotate].annotate_tag,indexCollec,indexAnnotate)"
                                                                     class="glyphicon glyphicon-ok"
-                                                                    title="Ajouter ce mot-clé"></span>
+                                                                    title="Ajouter ce tag"></span>
                                         </div>
                                     </div>
                                 </accordion-group>

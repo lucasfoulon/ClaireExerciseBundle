@@ -603,9 +603,9 @@ resourceControllers.controller('resourceEditController', ['$scope', '$modal', 'R
             keyword[0].value = '';
         };
 
-        $scope.resourceAnnotateAddTagField = function (collection) {
-            var keyword = $("#resourceAnnotateAddTagKey");
-            var value = $("#resourceAnnotateAddTagValue");
+        $scope.resourceAnnotateAddTagField = function (collection,indexCollec,indexAnnotate) {
+            var keyword = $("#resourceAnnotateAddTagKey-"+indexCollec+"-"+indexAnnotate);
+            var value = $("#resourceAnnotateAddTagValue-"+indexCollec+"-"+indexAnnotate);
             $annotateAddTag = {key: keyword[0].value, value: value[0].value};
             collection.push($annotateAddTag);
             keyword[0].value = '';

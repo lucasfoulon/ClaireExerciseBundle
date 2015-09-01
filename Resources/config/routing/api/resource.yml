@@ -162,8 +162,24 @@ api_metadata_delete_by_resource:
 
 
 
+api_list_annotate_list_by_resource:
+    pattern:  /{resourceId}/list_annotates/
+    defaults: { _controller: SimpleITClaireExerciseBundle:Api/ExerciseResource/ListAnnotateByResource:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        resourceId: \d+
+
+api_list_annotate_edit:
+    pattern:  /{resourceId}/list_annotates/{listAnnotateId}
+    defaults: { _controller: SimpleITClaireExerciseBundle:Api/ExerciseResource/ListAnnotateByResource:edit }
+    methods: [PUT]
+    requirements:
+        _format: json
+        resourceId: \d+
+
 api_annotate_list_by_resource:
-    pattern:  /{resourceId}/annotates/
+    pattern:  /{resourceId}/list_annotates/{listAnnotateId}/annotates
     defaults: { _controller: SimpleITClaireExerciseBundle:Api/ExerciseResource/AnnotateByResource:list }
     methods: [GET]
     requirements:
