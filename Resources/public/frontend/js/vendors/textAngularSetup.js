@@ -425,7 +425,7 @@ angular.module('textAngularSetup', [])
 
 						//var keyannotate = mots + debut + fin;
 						//Convention annotation
-						var annotation = {value: mots, start: debut, end: fin};
+						var annotation = {value: mots, start: debut, end: fin, annotate_tag: new Array()};
 						//$scope.editedResource.annotate.push(annotation);
 						$scope.editedResource.list_annotate[$scope.editedResource.numlistannotate].annotate.push(annotation);
 
