@@ -1,0 +1,26 @@
+<accordion>
+    <accordion-group class="panel panel-primary" name="accordionBlock"
+                     data-ng-repeat="block in model.content.text_blocks track by $index"
+                     ng-init="openFirst('accordionBlock', $index); metadata_constraints = block.resource_constraint.metadata_constraints; blockTypes = ['text']"
+                     is-open="openFirstBlocks.accordionBlock[$index]">
+        <accordion-heading class="panel-heading">
+
+            <div class="row"
+                 title="Un bloc désigne un ensemble de ressources dont une partie sera tirée aléatoirement lors de la génération d'exercices">
+                <div class="col-xs-11">
+                    Bloc de ressources&nbsp;<span class="caret"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6"
+                     title="Le nombre de ressources à utiliser parmi celles de ce bloc pour constituer la liste des objets à trier dans l'exercice">
+                    <h5>Nombre de ressources</h5>
+                    <input type="number" ng-click="$event.stopPropagation();"
+                           ng-model="block.number_of_occurrences" class="form-control" style="height: 25px">
+                </div>
+            </div>
+        </accordion-heading>
+        <div ng-include src="BASE_CONFIG.urls.partials.teacher+'/fragment-resources-text-in-block.html'"></div>
+    </accordion-group>
+
+</accordion>

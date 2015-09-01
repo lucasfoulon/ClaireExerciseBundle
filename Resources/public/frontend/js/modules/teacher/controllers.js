@@ -734,7 +734,7 @@ modelControllers.controller('modelController', ['$scope', 'Exercise','Item', 'Ex
             public: false, // select public resources or not (boolean)
             type: { // resources types to be selected
                 multiple_choice: 'multiple-choice', pair_items: 'pair-items', order_items: 'order-items', open_ended_question: 'open-ended-question', group_items: 'group-items'
-                , multiple_choice_formula: 'multiple-choice-formula'
+                , multiple_choice_formula: 'multiple-choice-formula', text_exercise: 'text-exercise'
             },
             keywords: [], // list of keywords that a resource must have to be selected
             metadata: [] // list of metadata objects that a resource must have to be selected
@@ -1021,7 +1021,59 @@ modelControllers.controller('modelController', ['$scope', 'Exercise','Item', 'Ex
                     }
                 }
 
+                },
+            "text_exercise": {
+                "type": "text-exercise",
+                "title": "Nouveau modèle d'exercice sur des textes",
+                "public": false,
+                "archived": false,
+                "draft": false,
+                "complete": null,
+                "metadata": [],
+                "keywords": [],
+                "content": {
+                    "wording": null,
+                    "documents": [],
+                    "text_blocks": [
+                        {
+                            "number_of_occurrences": 0,
+                            "resources": [],
+                            "is_list": true,
+                            "is_annotate": false,
+                            "resource_constraint": {
+                                "metadata_constraints": [],
+                                "excluded": []
+                            },
+                            "resource_annotate_constraint": {
+                                "metadata_constraints": [],
+                                "excluded": []
+                            }
+                        }
+                    ],
+                    "shuffle_questions_order": true,
+                    "exercise_model_type": "text-exercise"
+                },
+                "required_exercise_resources": null,
+                "required_knowledges": null
+            },
+            "sub_text_exercise": {
+                "block_field": {
+                    "number_of_occurrences": 0,
+                    "resources": [],
+                    "is_list": true,
+                    "is_annotate": false,
+                    "max_number_of_propositions": 0,
+                    "max_number_of_right_propositions": 0,
+                    "resource_constraint": {
+                        "metadata_constraints": [],
+                        "excluded": []
+                    },
+                    "resource_annotate_constraint": {
+                        "metadata_constraints": [],
+                        "excluded": []
+                    }
                 }
+            }
 
         };
 
@@ -1512,6 +1564,11 @@ modelControllers.controller('modelListController', ['$scope', 'Model', '$locatio
                 $location.path('/teacher/model/' + data.id)
             });
             }
+            else if ( type == 'text-exercise'){
+                Model.save($scope.modelContext.newModel.test_exercise, function (data) {
+                $location.path('/teacher/model/' + data.id)
+            });
+            }
         };
     }]);
 
@@ -1543,6 +1600,9 @@ modelControllers.controller('modelEditController', ['$scope', 'Model', 'Resource
                 case 'group-items':
                     $scope.acceptedTypes = ['picture', 'text'];
                     break;
+                case 'text-exercise':
+                    $scope.acceptedTypes = ['text'];
+                    break;
             }
         });
 
@@ -1566,6 +1626,10 @@ modelControllers.controller('modelEditController', ['$scope', 'Model', 'Resource
                 case 'open-ended-question':
                     $scope.fillConstraints(model.content.question_blocks);
                     break;
+                case 'text-exercise':
+                    $scope.fillConstraints(model.content.text_blocks);
+                    $scope.fillConstraintsForTextExercise(model.content.text_blocks);
+                    break;
             }
         };
 
@@ -1582,6 +1646,26 @@ modelControllers.controller('modelEditController', ['$scope', 'Model', 'Resource
                 }
                 if (typeof blocks[i].resource_constraint.excluded === "undefined") {
                     blocks[i].resource_constraint.excluded = [];
+                }
+            }
+        };
+
+        $scope.fillConstraintsForTextExercise = function (blocks) {
+            for (var i = 0; i < blocks.length; ++i) {
+                if (typeof blocks[i].resource_annotate_constraint === "undefined") {
+                    blocks[i].resource_annotate_constraint = {
+                        "metadata_constraints": [],
+                        "excluded": []
+                    };
+                }
+                if (typeof blocks[i].resource_annotate_constraint.metadata_constraints === "undefined") {
+                    blocks[i].resource_annotate_constraint.metadata_constraints = [];
+                }
+                if (typeof blocks[i].resource_annotate_constraint.excluded === "undefined") {
+                    blocks[i].resource_annotate_constraint.excluded = [];
+                }
+                if (typeof blocks[i].is_annotate === "undefined") {
+                    blocks[i].is_annotate = false;
                 }
             }
         };
@@ -1880,3 +1964,16 @@ modelControllers.controller('modelEditMultipleChoiceFormulaController', ['$scope
         };
     }]);
 
+
+modelControllers.controller('modelEditTextExerciseController', ['$scope',
+    function ($scope) {
+
+        $scope.modelAddBlockField = function (collection) {
+            collection.splice(
+                collection.length,
+                0,
+                jQuery.extend(true, {}, $scope.modelContext.newModel.sub_text_exercise.block_field)
+            );
+        };
+
+    }]);
