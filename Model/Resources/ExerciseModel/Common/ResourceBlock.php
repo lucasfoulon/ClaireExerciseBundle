@@ -61,6 +61,13 @@ abstract class ResourceBlock
     protected $isList;
 
     /**
+     * @var bool $isAnnotate
+     * @Serializer\Type("boolean")
+     * @Serializer\Groups({"details", "exercise_model_storage"})
+     */
+    protected $isAnnotate;
+
+    /**
      * Test if the block is a list of designated resources or a constraint to
      * find resources
      *
@@ -89,6 +96,37 @@ abstract class ResourceBlock
     public function getIsList()
     {
         return $this->isList;
+    }
+
+    /**
+     * Test if the block is a constraint annotate list of designated resources or other methods to
+     * find resources
+     *
+     * @return boolean True if it is a constraint annotate list, else false
+     */
+    public function isAnnotate()
+    {
+        return $this->isAnnotate;
+    }
+
+    /**
+     * Set is_annotate
+     *
+     * @param mixed $is_annotate
+     */
+    public function setIsAnnotate($is_annotate)
+    {
+        $this->isAnnotate = $is_annotate;
+    }
+
+    /**
+     * Get is_annotate
+     *
+     * @return mixed
+     */
+    public function getIsAnnotate()
+    {
+        return $this->isAnnotate;
     }
 
     /**
