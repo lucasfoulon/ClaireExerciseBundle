@@ -54,6 +54,16 @@ abstract class ResourceBlock
     protected $resourceConstraint = null;
 
     /**
+     * The object annotate constraints. If it is null, the Block contains a
+     * list of ObjectId
+     *
+     * @var ObjectConstraints $resourceAnnotateConstraint
+     * @Serializer\Type("SimpleIT\ClaireExerciseBundle\Model\Resources\ModelObject\ObjectConstraints")
+     * @Serializer\Groups({"details", "exercise_model_storage"})
+     */
+    protected $resourceAnnotateConstraint = null;
+
+    /**
      * @var bool $isList
      * @Serializer\Type("boolean")
      * @Serializer\Groups({"details", "exercise_model_storage"})
@@ -193,12 +203,33 @@ abstract class ResourceBlock
 
     /**
      * Set the resource constraints. Sets the block in "constraints" mode and
-     * clears the list of exeisting resources.
+     * clears the list of existing resources.
      *
      * @param ObjectConstraints $resourceConstraint
      */
     public function setResourceConstraint(ObjectConstraints $resourceConstraint)
     {
         $this->resourceConstraint = $resourceConstraint;
+    }
+
+    /**
+     * Get the resource annotate constraints
+     *
+     * @return ObjectConstraints
+     */
+    public function getResourceAnnotateConstraint()
+    {
+        return $this->resourceAnnotateConstraint;
+    }
+
+    /**
+     * Set the resource annotate constraints. Sets the block in "constraints" mode and
+     * clears the list of existing resources.
+     *
+     * @param ObjectConstraints $resourceAnnotateConstraint
+     */
+    public function setResourceAnnotateConstraint(ObjectConstraints $resourceAnnotateConstraint)
+    {
+        $this->resourceAnnotateConstraint = $resourceAnnotateConstraint;
     }
 }
