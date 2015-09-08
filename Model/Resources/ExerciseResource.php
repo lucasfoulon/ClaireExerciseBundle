@@ -63,6 +63,11 @@ class ExerciseResource
      */
     const MULTIPLE_CHOICE_FORMULA_CLASS = 'SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoiceFormula\Exercise';
 
+    /**
+     * @const TEXT_EXERCISE_CLASS = 'SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Exercise'
+     */
+    const TEXT_EXERCISE_CLASS = 'SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Exercise';
+
 
     /**
      * @var int $id Id of exercise
@@ -252,8 +257,11 @@ class ExerciseResource
                 $class = self::OPEN_ENDED_QUESTION_CLASS;
                 break;
             case CommonExercise::MULTIPLE_CHOICE_FORMULA:
-            $class = self::MULTIPLE_CHOICE_FORMULA_CLASS;
-            break;
+                $class = self::MULTIPLE_CHOICE_FORMULA_CLASS;
+                break;
+            case CommonExercise::TEXT_EXERCISE:
+                $class = self::TEXT_EXERCISE_CLASS;
+                break;
             default:
                 throw new \LogicException('Unknown type');
         }
