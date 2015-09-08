@@ -31,7 +31,8 @@ use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseObject\ExerciseObject;
  *    "order-items": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\OrderItems\Exercise",
  *    "multiple-choice": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoice\Exercise",
  *    "open-ended-question": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\OpenEndedQuestion\Exercise",
- *    "multiple-choice-formula": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoiceFormula\Exercise"
+ *    "multiple-choice-formula": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoiceFormula\Exercise",
+ *    "text-exercise": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Exercise"
  * })
  */
 abstract class CommonExercise
@@ -65,6 +66,11 @@ abstract class CommonExercise
      * @const MULTIPLE_CHOICE_FORMULA = 'multiple-choice-formula'
      */
     const MULTIPLE_CHOICE_FORMULA = 'multiple-choice-formula';
+
+    /**
+     * @const TEXT_EXERCISE = 'text-exercise'
+     */
+    const TEXT_EXERCISE = 'text-exercise';
 
 
     /**
