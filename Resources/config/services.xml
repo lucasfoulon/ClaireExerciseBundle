@@ -20,6 +20,7 @@
         <parameter key="simple_it.exercise.order_items.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\ExerciseCreation\OrderItemsService</parameter>
         <parameter key="simple_it.exercise.open_ended_question.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\ExerciseCreation\OpenEndedQuestionService</parameter>
         <parameter key="simple_it.exercise.multiple_choice_formula.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\ExerciseCreation\MultipleChoiceFormulaService</parameter>
+        <parameter key="simple_it.exercise.text_exercise.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\ExerciseCreation\TextExerciseService</parameter>
 
         <parameter key="simple_it.exercise.stored_exercise.class">SimpleIT\ClaireExerciseBundle\Service\Exercise\CreatedExercise\StoredExerciseService</parameter>
         <parameter key="simple_it.exercise.entity.stored_exercise.class">SimpleIT\ClaireExerciseBundle\Entity\CreatedExercise\StoredExercise</parameter>
@@ -144,8 +145,11 @@
                 <argument type="service" id="doctrine.orm.entity_manager"/>
             </call>
             <call method="setMultipleChoiceFormulaService">
-            <argument type="service" id="simple_it.exercise.multiple_choice_formula"/>
-        </call>
+                <argument type="service" id="simple_it.exercise.multiple_choice_formula"/>
+            </call>
+            <call method="setTextExerciseService">
+                <argument type="service" id="simple_it.exercise.text_exercise"/>
+            </call>
         </service>
 
         <!-- Generators of specific types of exercises -->
@@ -233,6 +237,15 @@
             </call>
             <call method="setKnowledgeService">
                 <argument type="service" id="simple_it.exercise.knowledge"/>
+            </call>
+            <call method="setSerializer">
+                <argument type="service" id="simple_it.api.serializer"/>
+            </call>
+        </service>
+
+        <service id="simple_it.exercise.text_exercise" class="%simple_it.exercise.text_exercise.class%">
+            <call method="setExerciseResourceService">
+                <argument type="service" id="simple_it.exercise.exercise_resource"/>
             </call>
             <call method="setSerializer">
                 <argument type="service" id="simple_it.api.serializer"/>

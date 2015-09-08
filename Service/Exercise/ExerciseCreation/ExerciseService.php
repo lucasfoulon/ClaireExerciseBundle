@@ -71,6 +71,11 @@ class ExerciseService extends TransactionalService implements ExerciseServiceInt
     private $openEndedQuestionService;
 
     /**
+     * @var ExerciseCreationServiceInterface
+     */
+    private $textExerciseService;
+
+    /**
      * Set ExerciseModelService
      *
      * @param ExerciseModelServiceInterface $exerciseModelService
@@ -138,6 +143,16 @@ class ExerciseService extends TransactionalService implements ExerciseServiceInt
     public function setMultipleChoiceFormulaService(MultipleChoiceFormulaService $mcService)
     {
         $this->multipleChoiceFormulaService = $mcService;
+    }
+
+    /**
+     * Set TextExerciseService
+     *
+     * @param TextExerciseService $mcService
+     */
+    public function setTextExerciseService(TextExerciseService $textExerciseService)
+    {
+        $this->textExerciseService = $textExerciseService;
     }
 
 
@@ -239,8 +254,11 @@ class ExerciseService extends TransactionalService implements ExerciseServiceInt
                 $service = $this->openEndedQuestionService;
                 break;
             case CommonExercise::MULTIPLE_CHOICE_FORMULA:
-            $service = $this->multipleChoiceFormulaService;
-            break;
+                $service = $this->multipleChoiceFormulaService;
+                break;
+            case CommonExercise::TEXT_EXERCISE:
+                $service = $this->textExerciseService;
+                break;
             case null:
                 throw new \LogicException('The type of exercise should be specified');
             default :
