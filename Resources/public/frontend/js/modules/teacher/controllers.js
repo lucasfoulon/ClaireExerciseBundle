@@ -1755,6 +1755,15 @@ modelControllers.controller('modelEditController', ['$scope', 'Model', 'Resource
             if (!block.resource_constraint.hasOwnProperty('excluded')) {
                 block.resource_constraint.excluded = [];
             }
+            if (!block.hasOwnProperty('resource_annotate_constraint')) {
+                block.resource_annotate_constraint = {};
+            }
+            if (!block.resource_annotate_constraint.hasOwnProperty('metadata_constraints')) {
+                block.resource_annotate_constraint.metadata_constraints = [];
+            }
+            if (!block.resource_annotate_constraint.hasOwnProperty('excluded')) {
+                block.resource_annotate_constraint.excluded = [];
+            }
         };
 
         $scope.onDropResourceToBlock = function (event, resource, collection) {
@@ -1975,5 +1984,4 @@ modelControllers.controller('modelEditTextExerciseController', ['$scope',
                 jQuery.extend(true, {}, $scope.modelContext.newModel.sub_text_exercise.block_field)
             );
         };
-
     }]);

@@ -1,6 +1,7 @@
 <div class="panel-group">
     <div class="panel panel-info"
          data-ng-repeat="metadata_annotate_constraint in metadata_annotate_constraints track by $index">
+        <!-- Dans partial-model-edit-text-exercise.html : metadata_annotate_constraints = block.resource_annotate_constraint.metadata_constraints -->
         <div class="panel-heading">
             <ng-switch on="metadata_annotate_constraint.comparator">
                 <div ng-switch-when="exists" class="row">

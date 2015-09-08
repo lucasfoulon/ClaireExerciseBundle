@@ -1,7 +1,7 @@
 <accordion>
     <accordion-group class="panel panel-primary" name="accordionBlock"
                      data-ng-repeat="block in model.content.text_blocks track by $index"
-                     ng-init="openFirst('accordionBlock', $index); metadata_constraints = block.resource_constraint.metadata_constraints; blockTypes = ['text']"
+                     ng-init="openFirst('accordionBlock', $index); metadata_constraints = block.resource_constraint.metadata_constraints; metadata_annotate_constraints = block.resource_annotate_constraint.metadata_constraints; blockTypes = ['text']"
                      is-open="openFirstBlocks.accordionBlock[$index]">
         <accordion-heading class="panel-heading">
 
@@ -24,3 +24,11 @@
     </accordion-group>
 
 </accordion>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="col-centered">
+            <h5>Choisir le nombre de question</h5>
+        </div>
+    </div>
+</div>
