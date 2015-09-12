@@ -40,7 +40,7 @@ class TextExerciseService extends ExerciseCreationService
     {
         /** @var Model $commonModel */
         // Generation of the exercise with the model
-        $exercise = $this->generateTEExercise($commonModel, $owner);
+        $exercise = $this->generateTEExercise($exerciseModel, $commonModel, $owner);
 
         // Transformation of the exercise into entities (StoredExercise and Items)
         return $this->toStoredExercise(
@@ -59,25 +59,70 @@ class TextExerciseService extends ExerciseCreationService
      *
      * @return Exercise
      */
-    private function generateTEExercise(Model $model, User $owner)
+    private function generateTEExercise(ExerciseModel $exerciseModel, Model $model, User $owner)
     {
         $exercise = new Exercise($model->getWording());
 
         // Documents
         $this->addDocuments($model, $exercise, $owner);
 
-        // array to collect all the annotates to add
-        $modelAnnotateToAdd = array();
-
         $text = new Text();
         $text->setText("mon teeeeexte!");
         $text->addAnnotate("Mon annotate");
+        $text->addAnnotate($exerciseModel->getName());
+        $text->addAnnotate($exerciseModel->getTitle());
+
+        foreach($exerciseModel->getExercises() as $exe)
+        {
+            //$text->addAnnotate("testtttttt");
+        }
+
+        // array to collect all the questions to add
+        $modelQuestionToAdd = array();
+        $recupText = array();
+
+        // get the blocks
+        foreach ($model->getTextBlocks() as $block) {
+            $recupText = $this->mafunctionBlock($block,$owner);
+        }
+
+        foreach($recupText as $textetest) {
+
+            $exerciseText = new Text();
+            $exerciseText->setText($textetest->getText());
+
+
+            $exercise->addText($exerciseText);
+            $text->addAnnotate("prout");
+        }
 
         $exercise->addText($text);
 
         //$exercise->finalize();
 
         return $exercise;
+    }
+
+    /**
+     * TEST LUCAS
+     *
+     * @param TextBlock $block
+     * @param User $owner
+     *
+     * @return array An array of Text
+     */
+    public function mafunctionBlock(TextBlock $block, User $owner) {
+
+        $blockQuestions = array();
+        $numOfQuestions = $block->getNumberOfOccurrences();
+        /*
+         * if the block is a list
+         */
+        if ($block->isList()) {
+            $this->getObjectsFromList($block, $numOfQuestions, $blockQuestions, $owner);
+        }
+
+        return $blockQuestions;
     }
 
 
@@ -106,7 +151,7 @@ class TextExerciseService extends ExerciseCreationService
         //$item->setContent('{"question":"Pourquoi \u00e7a marche pas?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}');
 
         //annotate ='{"question":"Pourquoi \u00e7a marche pas?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}';
-        $itemResource->setContent($annotate);
+        //$itemResource->setContent($annotate);
 
         return $itemResource;
     }
