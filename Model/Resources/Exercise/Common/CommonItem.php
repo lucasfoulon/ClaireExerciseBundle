@@ -31,6 +31,7 @@ use JMS\Serializer\Annotation as Serializer;
  *    "multiple-choice-question": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoice\Question",
  *    "multiple-choice-formula-question": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoiceFormula\Question",
  *    "open-ended-question": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\OpenEndedQuestion\Question",
+ *    "text-exercise": "SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Text"
  * })
  */
 abstract class CommonItem implements Markable

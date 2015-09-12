@@ -17,31 +17,35 @@ use SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\Common\CommonExercise
 class Exercise extends CommonExercise
 {
     /**
+     * @var array $text The text
+     * @Serializer\Exclude
+     */
+    private $text = array();
+
+    /**
      * @var array $annotates An array of Annotate
      * @Serializer\Exclude
      */
     private $annotates = array();
 
     /**
-     * Get annotate at index $key
-     *
-     * @param int $key The index
-     *
-     * @return Annotate The annotate
-     */
-    public function getAnnotate($key)
-    {
-        return $this->annotates[$key];
-    }
-
-    /**
      * Get annotates
      *
-     * @return array An array of ExerciseAnnotate
+     * @return array An array of annotate
      */
     public function getAnnotates()
     {
         return $this->annotates;
+    }
+
+    /**
+     * Get annotate
+     *
+     * @param Annotate $annotate
+     */
+    public function setAnnotate($annotate)
+    {
+        $this->annotates = $annotate;
     }
 
     /**
@@ -55,21 +59,51 @@ class Exercise extends CommonExercise
     }
 
     /**
-     * Get the number of annotates
+     * Get text
      *
-     * @return int The number of annotates
+     * @return array The text
      */
-    public function getNumberOfAnnotates()
+    public function getText()
     {
-        return count($this->annotates);
+        return $this->text;
     }
 
     /**
-     * Compute the itemCount
+     * Set text
+     *
+     * @param array $text
      */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * Add a text
+     *
+     * @param Text $annotate
+     */
+    public function addText(Text $text)
+    {
+        $this->text[] = $text;
+    }
+
+    /**
+     * Get the number of annotates
+     *
+     * @return int The number of annotates
+     *
+    public function getNumberOfAnnotates()
+    {
+        return count($this->annotates);
+    }*/
+
+    /**
+     * Compute the itemCount
+     *
     public function finalize()
     {
         $this->itemCount = count($this->annotates);
-    }
+    */
 
 }

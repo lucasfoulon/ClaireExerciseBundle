@@ -59,6 +59,11 @@ abstract class ItemResourceFactory
     {
         $itemResource = new ItemResource();
 
+        // MARCHE EN DECOMMENTANT
+        //$item->setType('text-exercise');
+        //$item->setContent('{}');
+        //$item->setContent('{"question":"Pourquoiiiii?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}');
+
         $itemResource->setItemId($item->getId());
         $itemResource->setType($item->getType());
 
@@ -72,6 +77,7 @@ abstract class ItemResourceFactory
                 }
             )
             ->build();
+
         $content = $serializer->deserialize(
             $item->getContent(),
             ItemResource::getClass($item->getType()),

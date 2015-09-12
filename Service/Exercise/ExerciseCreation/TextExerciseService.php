@@ -15,9 +15,11 @@ use SimpleIT\ClaireExerciseBundle\Entity\ExerciseModel\ExerciseModel;
 use SimpleIT\ClaireExerciseBundle\Exception\InvalidAnswerException;
 //use SimpleIT\ClaireExerciseBundle\Model\ExerciseObject\MultipleChoiceQuestion;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\AnswerResourceFactory;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Annotate;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Exercise;
 //use SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoice\Proposition;
 //use SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoice\Question;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Text;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\Common\CommonModel;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\TextExercise\Model;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\TextExercise\TextBlock;
@@ -45,7 +47,7 @@ class TextExerciseService extends ExerciseCreationService
             $exercise,
             $exerciseModel,
             "text-exercise",
-            $exercise->getAnnotates()
+            $exercise->getText()
         );
     }
 
@@ -64,26 +66,16 @@ class TextExerciseService extends ExerciseCreationService
         // Documents
         $this->addDocuments($model, $exercise, $owner);
 
-        // array to collect all the questions to add
-        //$modelQuestionToAdd = array();
+        // array to collect all the annotates to add
+        $modelAnnotateToAdd = array();
 
-        // get the blocks
-        //foreach ($model->getQuestionBlocks() as $block) {
-         //   $this->addQuestionsFromBlock($block, $modelQuestionToAdd, $owner);
-        //}
+        $text = new Text();
+        $text->setText("mon teeeeexte!");
+        $text->addAnnotate("Mon annotate");
 
-        /*
-         *  Create and add the exercise questions
-         */
-       // $this->addQuestionsToTheExercise($modelQuestionToAdd, $exercise);
+        $exercise->addText($text);
 
-        // shuffle the order of the questions (if needed) and the propositions
-       // if ($model->isShuffleQuestionsOrder()) {
-        //    $exercise->shuffleQuestionOrder();
-        //}
-        //$exercise->shufflePropositionOrder();
-
-        $exercise->finalize();
+        //$exercise->finalize();
 
         return $exercise;
     }
@@ -99,7 +91,25 @@ class TextExerciseService extends ExerciseCreationService
      *
      * @return ItemResource
      */
-    public function correct(Item $entityItem, Answer $answer){}
+    public function correct(Item $entityItem, Answer $answer)
+    {
+        // MARCHE PAS
+        //$entityItem->setType('text-exercise');
+        //$entityItem->setContent('{"question":"Pourquoi \u00e7a marche pas?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}');
+
+        $itemResource = ItemResourceFactory::create($entityItem);
+        /** @var Annotate $annotate */
+        $annotate = $itemResource->getContent();
+
+        //$this->mark($question);
+        //$question->setType('text-exercise');
+        //$item->setContent('{"question":"Pourquoi \u00e7a marche pas?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}');
+
+        //annotate ='{"question":"Pourquoi \u00e7a marche pas?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}';
+        $itemResource->setContent($annotate);
+
+        return $itemResource;
+    }
 
     /**
      * Validate the answer to an item
@@ -118,5 +128,18 @@ class TextExerciseService extends ExerciseCreationService
      *
      * @return ItemResource
      */
-    public function noSolutionItem($itemResource){}
+    public function noSolutionItem($itemResource)
+    {
+        /** @var Question $content */
+        $content = $itemResource->getContent();
+
+        //$content->setComment(null);
+
+        /** @var Proposition $prop */
+        /*foreach ($content->getPropositions() as $prop) {
+            $prop->setRight(null);
+        }*/
+
+        return $itemResource;
+    }
 }

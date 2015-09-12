@@ -64,6 +64,11 @@ class ItemResource
      */
     const MULTIPLE_CHOICE_FORMULA_CLASS = 'SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\MultipleChoiceFormula\Question';
 
+    /**
+     * @const TEXT_EXERCISE_CLASS = 'SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Text'
+     */
+    const TEXT_EXERCISE_CLASS = 'SimpleIT\ClaireExerciseBundle\Model\Resources\Exercise\TextExercise\Text';
+
 
     /**
      * @var int $itemId Id of item
@@ -201,6 +206,9 @@ class ItemResource
                 break;
             case CommonExercise::MULTIPLE_CHOICE_FORMULA:
                 $class = self::MULTIPLE_CHOICE_FORMULA_CLASS;
+                break;
+            case CommonExercise::TEXT_EXERCISE:
+                $class = self::TEXT_EXERCISE_CLASS;
                 break;
             default:
                 throw new \LogicException('Unknown type');
