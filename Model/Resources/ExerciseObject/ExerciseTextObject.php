@@ -37,6 +37,13 @@ class ExerciseTextObject extends ExerciseObject
     private $text;
 
     /**
+     * @var array $list_annotate An array of List Annotate
+     * @Serializer\Type("array<SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\Text\ListAnnotateResource>")
+     * @Serializer\Groups({"details", "resource_storage"})
+     */
+    private $list_annotate = array();
+
+    /**
      * Get text
      *
      * @return string
@@ -54,5 +61,25 @@ class ExerciseTextObject extends ExerciseObject
     public function setText($text)
     {
         $this->text = $text;
+    }
+
+    /**
+     * Set list annotate
+     *
+     * @param array $list_annotates
+     */
+    public function setListAnnotate($list_annotate)
+    {
+        $this->list_annotate = $list_annotate;
+    }
+
+    /**
+     * Get list annotate
+     *
+     * @return array
+     */
+    public function getListAnnotate()
+    {
+        return $this->list_annotate;
     }
 }

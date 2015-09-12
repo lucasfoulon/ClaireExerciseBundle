@@ -47,6 +47,8 @@ use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\Sequence\Reso
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\Sequence\SequenceBlock;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\Sequence\SequenceElement;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\SequenceResource;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\Text\AnnotateResource;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\Text\ListAnnotateResource;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\TextResource;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\KnowledgeResource;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\MetadataResource;
@@ -471,6 +473,17 @@ class ExerciseResourceService extends SharedEntityService implements ExerciseRes
     {
         $resource = $this->createResourceObjectFromResourceEntity($resEntity);
         $requiredResources = array();
+
+        /**
+         * Only for TextResource
+         */
+        if($resEntity->getType() == "text" && !empty($resEntity->getListAnnotate()))
+        {
+            foreach($resEntity->getListAnnotate() as $la) {
+                $resource->addListAnnotate($la);
+
+            }
+        }
 
         foreach ($resEntity->getRequiredExerciseResources() as $req) {
             /** @var ExerciseResource $req */

@@ -39,6 +39,7 @@ abstract class ExerciseTextFactory
     {
         $textObj = new ExerciseTextObject();
         $textObj->setText($res->getText());
+        $textObj->setListAnnotate($res->getListAnnotate());
 
         return $textObj;
     }

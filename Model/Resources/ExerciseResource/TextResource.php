@@ -20,6 +20,7 @@ namespace SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource;
 
 use JMS\Serializer\Annotation as Serializer;
 use SimpleIT\ClaireExerciseBundle\Exception\InvalidExerciseResourceException;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateResource;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -35,6 +36,13 @@ class TextResource extends CommonResource
      * @Serializer\Groups({"details", "resource_storage"})
      */
     private $text;
+
+    /**
+     * @var array $list_annotate An array of ListAnnotate
+     * @Serializer\Type("array<SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\Text\ListAnnotateResource>")
+     * @Serializer\Groups({"details", "resource_storage"})
+     */
+    private $list_annotate = array();
 
     /**
      * Get text
@@ -54,6 +62,36 @@ class TextResource extends CommonResource
     public function setText($text)
     {
         $this->text = $text;
+    }
+
+    /**
+     * Set list annotate
+     *
+     * @param array $list_annotate
+     */
+    public function setListAnnotate($list_annotate)
+    {
+        $this->list_annotate = $list_annotate;
+    }
+
+    /**
+     * Get list annotate
+     *
+     * @return array
+     */
+    public function getListAnnotate()
+    {
+        return $this->list_annotate;
+    }
+
+    /**
+     * Add list annotate
+     *
+     * @param <SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\Text\ListAnnotateResource> $list_annotate
+     */
+    public function addListAnnotate($list_annotate)
+    {
+        $this->list_annotate[] = $list_annotate;
     }
 
     /**

@@ -66,19 +66,12 @@ class TextExerciseService extends ExerciseCreationService
         // Documents
         $this->addDocuments($model, $exercise, $owner);
 
-        $text = new Text();
-        $text->setText("mon teeeeexte!");
-        $text->addAnnotate("Mon annotate");
-        $text->addAnnotate($exerciseModel->getName());
-        $text->addAnnotate($exerciseModel->getTitle());
-
         foreach($exerciseModel->getExercises() as $exe)
         {
             //$text->addAnnotate("testtttttt");
         }
 
-        // array to collect all the questions to add
-        $modelQuestionToAdd = array();
+        // array to collect all the text to add
         $recupText = array();
 
         // get the blocks
@@ -91,12 +84,14 @@ class TextExerciseService extends ExerciseCreationService
             $exerciseText = new Text();
             $exerciseText->setText($textetest->getText());
 
+            foreach($textetest->getListAnnotate() as $la) {
+                foreach($la->getAnnotate() as $an) {
+                    $exerciseText->addAnnotate($an->getValue());
+                }
+            }
 
             $exercise->addText($exerciseText);
-            $text->addAnnotate("prout");
         }
-
-        $exercise->addText($text);
 
         //$exercise->finalize();
 
