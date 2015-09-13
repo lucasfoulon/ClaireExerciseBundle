@@ -400,6 +400,7 @@ angular.module('textAngularSetup', [])
 				/* Permet d'afficher un popup sur le bouton d'annotation */
 				var buttonAnnotate = document.getElementsByName("annotate");
 				buttonAnnotate[0].setAttribute('data-toggle','tooltip');
+
 				$(document).ready(function(){
 					$('[data-toggle="tooltip"]').popover({
 						content: function() {
@@ -437,7 +438,7 @@ angular.module('textAngularSetup', [])
 					}
 				}
 
-				var element = document.getElementById("viewAnnotateForResource");
+                var element = document.getElementById("viewAnnotateForResource");
 				compile(element,mots,debut,fin);
 			}
 		});
