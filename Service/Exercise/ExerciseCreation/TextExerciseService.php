@@ -84,11 +84,27 @@ class TextExerciseService extends ExerciseCreationService
             $exerciseText = new Text();
             $exerciseText->setText($textetest->getText());
 
+            $debuts = array();
+            $fins = array();
+
             foreach($textetest->getListAnnotate() as $la) {
                 foreach($la->getAnnotate() as $an) {
                     $exerciseText->addAnnotate($an->getValue());
+                    $debuts[] = $an->getStart();
+                    $fins[] = $an->getEnd();
+
+                    $remplacement = '<input type="text" ng-model="input">';
+                    //$remplacement = '<a href="#">mon mot</a>';
+
+                    //$textTemp = $exerciseText->getText();
+                    $textTemp = str_replace($an->getValue(),$remplacement,$exerciseText->getText());
+                    $exerciseText->setText($textTemp);
                 }
             }
+
+            //array_shift($fins[]); // depile un element au debut
+
+            //ATTENTION, A VERIFIER QUE LES ANNOTATIONS NE SE CHEVAUCHENT PAS
 
             $exercise->addText($exerciseText);
         }

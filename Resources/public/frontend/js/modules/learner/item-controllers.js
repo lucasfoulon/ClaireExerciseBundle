@@ -629,8 +629,9 @@ itemControllers.controller('groupItemsController', ['$scope', 'Answer', '$routeP
     }]);
 
 
-itemControllers.controller('textExerciseController', ['$scope', 'Answer', '$routeParams', '$location', '$stateParams',
-    function ($scope, Answer, $routeParams, $location, $stateParams) {
+itemControllers.controller('textExerciseController', ['$sce', '$scope', 'Answer', '$routeParams', '$location', '$stateParams',
+    function ($sce, $scope, Answer, $routeParams, $location, $stateParams) {
 
+        $scope.item['content'].textHTML = $sce.trustAsHtml($scope.item['content'].text);
 
     }]);
