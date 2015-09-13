@@ -775,7 +775,7 @@
 <div ng-if="editedResource.type === 'text'"
      class="panel panel-success" ><!-- data-ng-controller="resourceTextController"> -->
     <div class="panel-heading">
-        <div class="row">
+        <div class="row" id="viewAnnotateForResource">
             <div class="col-xs-12">
                 <h4>Annotations</h4>
                 <h5>Sélectionnez une liste pour rajouter des annotations, la liste ouverte est celle en cours d'annotation</h5>
@@ -800,7 +800,7 @@
                         <accordion close-others="true" class="row center-block">
                                 <accordion-group class="panel panel-default" ng-repeat="annotate in list_annotate.annotate track by $index">
                                     <accordion-heading class="panel-heading">
-                                        <div class="row" id="viewAnnotateForResource">
+                                        <div class="row">
                                             <div class="col-xs-8">
                                                 <span class="glyphicon glyphicon-th-list"></span>&nbsp;Annotation n°{{$index+1}} : {{annotate.value}}&nbsp;<span class="caret"></span>
                                             </div>
