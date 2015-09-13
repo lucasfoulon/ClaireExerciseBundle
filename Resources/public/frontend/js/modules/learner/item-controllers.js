@@ -23,6 +23,7 @@ attemptControllers.controller('attemptController', ['$scope', '$state', 'Attempt
                             function () {
                                 // when data loaded
                                 console.log('items loaded.');
+                                console.log($scope.items[0]);
                                 $scope.gotoItem(0);
                             });
                     });
@@ -44,6 +45,8 @@ attemptControllers.controller('attemptController', ['$scope', '$state', 'Attempt
                 $state.go('attempt.multiple-choice-formula', {itemId: index}, {location: false});
             } else if ($scope.item.type == 'open-ended-question') {
                 $state.go('attempt.open-ended-question', {itemId: index}, {location: false});
+            } else if ($scope.item.type == 'text-exercise') {
+                $state.go('attempt.text-exercise', {itemId: index}, {location: false});
             }
         };
 
@@ -623,4 +626,11 @@ itemControllers.controller('groupItemsController', ['$scope', 'Answer', '$routeP
             $scope.fillLearnerAnswers();
             $scope.displayCorrection($scope.item);
         }
+    }]);
+
+
+itemControllers.controller('textExerciseController', ['$scope', 'Answer', '$routeParams', '$location', '$stateParams',
+    function ($scope, Answer, $routeParams, $location, $stateParams) {
+
+
     }]);

@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div data-ng-controller="textExerciseController">
 
-</body>
-</html>
+    <div class="panel">
+        <div class="panel-heading row">
+            <div class="col-xs-6">
+                <span ng-bind-html="item.content.text"></span>
+            </div>
+        </div>
+    </div>
+
+    <ng-include src="navBarUrl"></ng-include>
+</div>
