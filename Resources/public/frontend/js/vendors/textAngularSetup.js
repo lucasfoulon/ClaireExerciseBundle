@@ -376,7 +376,19 @@ angular.module('textAngularSetup', [])
 
 				var sel = window.getSelection();
 
-				var parent = sel.anchorNode;
+                //TEST
+                var selectedElement = taSelection.getSelectionElement();
+                var $selected = angular.element(selectedElement);
+                console.log($selected);
+
+                var range = window.getSelection().getRangeAt(0),
+                    content = range.cloneContents();
+
+                //range.insertNode(content);
+
+                //FIN TEST
+
+                var parent = sel.anchorNode;
 				if(typeof parent.id == "undefined")
 					parent.id = "pasbien";
 				while(parent.tagName != "DIV" && parent.id.indexOf("taTextElement") == -1) {
@@ -386,16 +398,55 @@ angular.module('textAngularSetup', [])
 				}
 
                 //Récupère position fin curseur
-				var range = sel.getRangeAt(0);
+				//var range = sel.getRangeAt(0);
 				var preCaretRange = range.cloneRange();
-				preCaretRange.selectNodeContents(parent);
+                //preCaretRange.selectNodeContents(parent);
+				preCaretRange.selectNodeContents($selected[0]);
 				preCaretRange.setEnd(range.endContainer, range.endOffset);
+                //console.log(preCaretRange);
 
 				//Ajout dans la barre d'annotation
 				var mots = sel.getRangeAt(0).toString();
 				var lg = mots.length;
 				var fin = preCaretRange.toString().length;
+                console.log("fin: "+fin);
 				var debut = fin - lg;
+
+                var parent = $selected[0];
+                while(parent.tagName != "DIV" && parent.id.indexOf("taTextElement") == -1) {
+
+                    //A faire pour toutes les balises possibles!!
+                    if($selected[0].nodeName == 'P') {
+
+                        debut += 3;
+                        fin += 3;
+
+                    }
+                    parent = parent.parentElement;
+                    console.log(parent);
+
+                }
+
+                console.log("A COMPARER");
+                //A COMPARER EN DEUX TEMPS,
+                //AVANT LE MOT
+                //PUIS DANS LE MOT
+                console.log(preCaretRange.toString());
+                console.log($selected[0].innerHTML);
+                var lgAComp = preCaretRange.toString().length;
+                var lgMax = $selected[0].innerHTML.length;
+                var j = 0;
+                var manque = 0;
+                for(var i = 0 ; i < lgMax ; i++) {
+                    if(preCaretRange.toString()[j] == $selected[0].innerHTML[i]) {
+                        j++;
+                    }
+                    else if (j<lgAComp){
+                        manque++;
+                    }
+                }
+                console.log("manque : "+manque);
+                console.log("FIN A COMPARER");
 
 				/* Permet d'afficher un popup sur le bouton d'annotation */
 				var buttonAnnotate = document.getElementsByName("annotate");
@@ -430,11 +481,11 @@ angular.module('textAngularSetup', [])
 						//$scope.editedResource.annotate.push(annotation);
 						$scope.editedResource.list_annotate[$scope.editedResource.numlistannotate].annotate.push(annotation);
 
-						console.log($scope.editedResource.list_annotate);
+						//console.log($scope.editedResource.list_annotate);
 
 					}
 					else {
-						console.log("erreur choisir une liste");
+						//console.log("erreur choisir une liste");
 					}
 				}
 
