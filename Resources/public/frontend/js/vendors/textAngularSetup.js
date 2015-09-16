@@ -377,7 +377,6 @@ angular.module('textAngularSetup', [])
 				var sel = window.getSelection();
                 var selectedElement = taSelection.getSelectionElement();
                 var $selected = angular.element(selectedElement);
-                console.log($selected);
 
                 var selectParent = $selected[0];
                 if(typeof selectParent.id == "undefined")
@@ -388,61 +387,29 @@ angular.module('textAngularSetup', [])
                         selectParent.id = "pasbien";
                 }
 
-                var range = window.getSelection().getRangeAt(0);
-                //var content = range.cloneContents();
-                //range.insertNode(content);
-
-                /*var parent = sel.anchorNode;
-				if(typeof parent.id == "undefined")
-					parent.id = "pasbien";
-				while(parent.tagName != "DIV" && parent.id.indexOf("taTextElement") == -1) {
-					parent = parent.parentElement;
-					if(typeof parent.id == "undefined")
-						parent.id = "pasbien";
-				}*/
-
                 //Récupère position fin curseur
-				//var range = sel.getRangeAt(0);
+                var range = sel.getRangeAt(0);
 				var preCaretRange = range.cloneRange();
-                //preCaretRange.selectNodeContents(parent);
 				preCaretRange.selectNodeContents(selectParent);
 				preCaretRange.setEnd(range.endContainer, range.endOffset);
-                //console.log(preCaretRange);
 
 				//Ajout dans la barre d'annotation
-				var mots = sel.getRangeAt(0).toString();
+				var mots = range.toString();
 				var lg = mots.length;
 				var fin = preCaretRange.toString().length;
-                console.log("fin: "+fin);
 				var debut = fin - lg;
 
-                /*var parent = $selected[0];
-                while(parent.tagName != "DIV" && parent.id.indexOf("taTextElement") == -1) {
-                    //A faire pour toutes les balises possibles!!
-                    if($selected[0].nodeName == 'P') {
-
-                        debut += 3;
-                        fin += 3;
-                    }
-                    parent = parent.parentElement;
-                    console.log(parent);
-
-                }*/
-
-                console.log("A COMPARER");
-                //A COMPARER EN DEUX TEMPS,
-                console.log(preCaretRange.toString());
-                console.log(selectParent.innerHTML);
-                var lgAComp = preCaretRange.toString().length;
+                //A COMPARER EN DEUX TEMPS, ...
                 var lgMax = selectParent.innerHTML.length;
                 var j = 0;
                 var manque = 0;
                 var manqueMot = 0;
                 for(var i = 0 ; i < lgMax ; i++) {
+                    //Compare les deux chaines, l'une sans balise, l'autre avec
                     if(preCaretRange.toString()[j] == selectParent.innerHTML[i]) {
                         j++;
                     }
-                    else if (j<lgAComp){
+                    else if (j<fin){
                         //AVANT LE MOT
                         if(j<debut)
                             manque++;
@@ -451,9 +418,9 @@ angular.module('textAngularSetup', [])
                             manqueMot++;
                     }
                 }
-                console.log("manque : "+manque);
-                console.log("manque annot : "+manqueMot);
-                console.log("FIN A COMPARER");
+
+                debut += manque;
+                fin += manque + manqueMot;
 
 				/* Permet d'afficher un popup sur le bouton d'annotation */
 				var buttonAnnotate = document.getElementsByName("annotate");
@@ -474,18 +441,13 @@ angular.module('textAngularSetup', [])
 					var el = angular.element(element);
 					$scope = el.scope();
 
-					/*if(typeof $scope.editedResource.annotate == "undefined")
-						$scope.editedResource.annotate = new Array();*/
-
                     if(typeof $scope.editedResource.numlistannotate == "undefined")
                         $scope.editedResource.numlistannotate = -1;
 
 					if($scope.editedResource.numlistannotate != -1) {
 
-						//var keyannotate = mots + debut + fin;
 						//Convention annotation
 						var annotation = {value: mots, start: debut, end: fin, annotate_tag: new Array()};
-						//$scope.editedResource.annotate.push(annotation);
 						$scope.editedResource.list_annotate[$scope.editedResource.numlistannotate].annotate.push(annotation);
 
 						//console.log($scope.editedResource.list_annotate);
