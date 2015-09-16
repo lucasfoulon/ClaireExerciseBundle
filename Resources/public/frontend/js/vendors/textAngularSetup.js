@@ -375,33 +375,37 @@ angular.module('textAngularSetup', [])
 			action: function(){
 
 				var sel = window.getSelection();
-
-                //TEST
                 var selectedElement = taSelection.getSelectionElement();
                 var $selected = angular.element(selectedElement);
                 console.log($selected);
 
-                var range = window.getSelection().getRangeAt(0),
-                    content = range.cloneContents();
+                var selectParent = $selected[0];
+                if(typeof selectParent.id == "undefined")
+                    selectParent.id = "pasbien";
+                while(selectParent.tagName != "DIV" && selectParent.id.indexOf("taTextElement") == -1) {
+                    selectParent = selectParent.parentElement;
+                    if(typeof selectParent.id == "undefined")
+                        selectParent.id = "pasbien";
+                }
 
+                var range = window.getSelection().getRangeAt(0);
+                //var content = range.cloneContents();
                 //range.insertNode(content);
 
-                //FIN TEST
-
-                var parent = sel.anchorNode;
+                /*var parent = sel.anchorNode;
 				if(typeof parent.id == "undefined")
 					parent.id = "pasbien";
 				while(parent.tagName != "DIV" && parent.id.indexOf("taTextElement") == -1) {
 					parent = parent.parentElement;
 					if(typeof parent.id == "undefined")
 						parent.id = "pasbien";
-				}
+				}*/
 
                 //Récupère position fin curseur
 				//var range = sel.getRangeAt(0);
 				var preCaretRange = range.cloneRange();
                 //preCaretRange.selectNodeContents(parent);
-				preCaretRange.selectNodeContents($selected[0]);
+				preCaretRange.selectNodeContents(selectParent);
 				preCaretRange.setEnd(range.endContainer, range.endOffset);
                 //console.log(preCaretRange);
 
@@ -412,40 +416,43 @@ angular.module('textAngularSetup', [])
                 console.log("fin: "+fin);
 				var debut = fin - lg;
 
-                var parent = $selected[0];
+                /*var parent = $selected[0];
                 while(parent.tagName != "DIV" && parent.id.indexOf("taTextElement") == -1) {
-
                     //A faire pour toutes les balises possibles!!
                     if($selected[0].nodeName == 'P') {
 
                         debut += 3;
                         fin += 3;
-
                     }
                     parent = parent.parentElement;
                     console.log(parent);
 
-                }
+                }*/
 
                 console.log("A COMPARER");
                 //A COMPARER EN DEUX TEMPS,
-                //AVANT LE MOT
-                //PUIS DANS LE MOT
                 console.log(preCaretRange.toString());
-                console.log($selected[0].innerHTML);
+                console.log(selectParent.innerHTML);
                 var lgAComp = preCaretRange.toString().length;
-                var lgMax = $selected[0].innerHTML.length;
+                var lgMax = selectParent.innerHTML.length;
                 var j = 0;
                 var manque = 0;
+                var manqueMot = 0;
                 for(var i = 0 ; i < lgMax ; i++) {
-                    if(preCaretRange.toString()[j] == $selected[0].innerHTML[i]) {
+                    if(preCaretRange.toString()[j] == selectParent.innerHTML[i]) {
                         j++;
                     }
                     else if (j<lgAComp){
-                        manque++;
+                        //AVANT LE MOT
+                        if(j<debut)
+                            manque++;
+                        //PUIS DANS LE MOT
+                        else
+                            manqueMot++;
                     }
                 }
                 console.log("manque : "+manque);
+                console.log("manque annot : "+manqueMot);
                 console.log("FIN A COMPARER");
 
 				/* Permet d'afficher un popup sur le bouton d'annotation */
