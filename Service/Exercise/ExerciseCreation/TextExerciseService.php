@@ -123,14 +123,6 @@ class TextExerciseService extends ExerciseCreationService
                         $plus = $plusBis;
                         $an->setStart($an->getStart()+$plus);
                     }*/
-                    $plus = substr_count($input, "/", 0, $an->getStart());
-                    $plusBis = substr_count($input, "/", 0, $an->getStart()+$plus);
-                    while($plus != $plusBis) {
-                        $plus = $plusBis;
-                        $plusBis = substr_count($input, "/", 0, $an->getStart()+$plus);
-                    }
-                    $an->setStart($an->getStart()+$plus);
-                    $an->setEnd($an->getEnd()+$plus);
 
                     //Trier les annotations par leur position
                     //if($test != $an->getStart())
@@ -161,9 +153,19 @@ class TextExerciseService extends ExerciseCreationService
                 $remplacement = '<input type="text" ng-model="input">';
                 //$remplacement = '<a href="#">mon mot</a>';
 
+
+                $plus = substr_count($input, "/", 0, $an->getStart());
+                $plusBis = substr_count($input, "/", 0, $an->getStart()+$plus);
+                while($plus != $plusBis) {
+                    $plus = $plusBis;
+                    $plusBis = substr_count($input, "/", 0, $an->getStart()+$plus);
+                }
+                //$an->setStart($an->getStart()+$plus);
+                //$an->setEnd($an->getEnd()+$plus);
+
                 //$textTemp = $exerciseText->getText();
                 //$textTemp = str_replace($an->getValue(),$remplacement,$exerciseText->getText());
-                $textTemp = substr_replace($exerciseText->getText(),$remplacement,$an->getStart(),$an->getEnd()-$an->getStart());
+                $textTemp = substr_replace($exerciseText->getText(),$remplacement,$an->getStart()+$plus,$an->getEnd()-$an->getStart());
                 $exerciseText->setText($textTemp);
             }
 
