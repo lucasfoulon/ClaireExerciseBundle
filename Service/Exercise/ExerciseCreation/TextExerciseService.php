@@ -87,37 +87,84 @@ class TextExerciseService extends ExerciseCreationService
             $debuts = array();
             $fins = array();
 
-            //$testASCII = html_entity_decode(htmlentities($exerciseText->getText()),ENT_HTML5);
-
             /* Entity crap. */
             $input = $exerciseText->getText();
+
+            //$plus = substr_count($input, "/(&#[0-9]+;)/");
+            //$plus += substr_count($input, "î");
+
+
+            $annotateTrie = array();
+
+            foreach($textetest->getListAnnotate() as $la) {
+                foreach($la->getAnnotate() as $an) {
+                //$an = $la->getAnnotate()[1];
+                    //Trouve les décalages des caractères spéciaux
+
+                    //TEST BIDON
+                    $test = $an->getStart();
+
+                    //EN DEUX TEMPS,
+                    //AVANT LE MOT
+                    //ET DANS LE MOT
+                    /*$plus = substr_count($input, "/(&#[0-9]+;)/", 0, $an->getStart());
+                    $plus *= 6;
+                    $an->setStart($an->getStart()+$plus);
+                    $plusBis = substr_count($input, "/(&#[0-9]+;)/", 0, $an->getStart());
+                    $plusBis *= 6;
+                    while($plusBis != $plus) {
+                        $plus = $plusBis;
+                        $an->setStart($an->getStart()+$plus);
+                        $plusBis = substr_count($input, "/(&#[0-9]+;)/", 0, $an->getStart());
+                        $plusBis *= 6;
+                    }
+                    if($plusBis == 0) {
+                        $plusBis = substr_count($input, "/(&#[0-9]+;)/", 0, $an->getStart()+6);
+                        $plus = $plusBis;
+                        $an->setStart($an->getStart()+$plus);
+                    }*/
+                    $plus = substr_count($input, "/", 0, $an->getStart());
+                    $plusBis = substr_count($input, "/", 0, $an->getStart()+$plus);
+                    while($plus != $plusBis) {
+                        $plus = $plusBis;
+                        $plusBis = substr_count($input, "/", 0, $an->getStart()+$plus);
+                    }
+                    $an->setStart($an->getStart()+$plus);
+                    $an->setEnd($an->getEnd()+$plus);
+
+                    //Trier les annotations par leur position
+                    //if($test != $an->getStart())
+                        $annotateTrie[$an->getStart()] = $an;
+                }
+            }
+
+            //$testASCII = html_entity_decode(htmlentities($exerciseText->getText()),ENT_HTML5);
 
             //$input = preg_replace_callback("/(&#[0-9]+;)/",
             //    function($m) { return mb_convert_encoding($m[1], "UTF-8", "HTML-ENTITIES"); }, $input);
 
-            $input = str_replace("&#233;","é",$input);
-            $input = str_replace("&#238;","î",$input);
+            //$input = preg_replace('/&#([0-9]+);/ei', 'chr(intval(\'\\1\'))', $input);
 
-            $plus = substr_count($input, "é");
+            //$input = str_replace("&#233;","é",$input);
+            //$input = str_replace("&#238;","i",$input); //î ne marche pas
 
             $exerciseText->setText($input);
 
-            foreach($textetest->getListAnnotate() as $la) {
-                //foreach($la->getAnnotate() as $an) {
-                $an = $la->getAnnotate()[0];
+            while(!empty($annotateTrie)) {
 
-                    $exerciseText->addAnnotate($an->getValue());
-                    $debuts[] = $an->getStart();
-                    $fins[] = $an->getEnd();
+                //$debuts[] = $an->getStart();
+                //$fins[] = $an->getEnd();
 
-                    $remplacement = '<input type="text" ng-model="input">';
-                    //$remplacement = '<a href="#">mon mot</a>';
+                $an = array_pop($annotateTrie);
+                $exerciseText->addAnnotate($an->getValue());
 
-                    //$textTemp = $exerciseText->getText();
-                    //$textTemp = str_replace($an->getValue(),$remplacement,$exerciseText->getText());
-                    $textTemp = substr_replace($exerciseText->getText(),$remplacement,$an->getStart()+$plus,$an->getEnd()-$an->getStart());
-                    $exerciseText->setText($textTemp);
-                //}
+                $remplacement = '<input type="text" ng-model="input">';
+                //$remplacement = '<a href="#">mon mot</a>';
+
+                //$textTemp = $exerciseText->getText();
+                //$textTemp = str_replace($an->getValue(),$remplacement,$exerciseText->getText());
+                $textTemp = substr_replace($exerciseText->getText(),$remplacement,$an->getStart(),$an->getEnd()-$an->getStart());
+                $exerciseText->setText($textTemp);
             }
 
             //array_shift($fins[]); // depile un element au debut

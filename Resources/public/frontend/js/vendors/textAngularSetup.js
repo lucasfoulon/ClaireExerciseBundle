@@ -395,7 +395,9 @@ angular.module('textAngularSetup', [])
 
 				//Ajout dans la barre d'annotation
 				var mots = range.toString();
+                console.log(mots);
 				var lg = mots.length;
+                console.log("longueur mot : "+lg);
 				var fin = preCaretRange.toString().length;
 				var debut = fin - lg;
 
@@ -404,18 +406,33 @@ angular.module('textAngularSetup', [])
                 var j = 0;
                 var manque = 0;
                 var manqueMot = 0;
+                var slash = "/";
+                console.log("char at /: "+slash.charCodeAt(0));
                 for(var i = 0 ; i < lgMax ; i++) {
                     //Compare les deux chaines, l'une sans balise, l'autre avec
                     if(preCaretRange.toString()[j] == selectParent.innerHTML[i]) {
                         j++;
+                        if(preCaretRange.toString().charCodeAt(j) >= 128) {
+                            //AVANT LE MOT
+                            if(j<debut)
+                                manque += 5;
+                            //PUIS DANS LE MOT
+                            else
+                                manqueMot += 5;
+                        }
                     }
                     else if (j<fin){
+                        //console.log("char : "+selectParent.innerHTML.charAt(i)+" code at : "+selectParent.innerHTML.charCodeAt(i));
                         //AVANT LE MOT
-                        if(j<debut)
+                        if(j<debut+1) {
                             manque++;
+                            console.log("incrémente avant mot : "+selectParent.innerHTML.charAt(i));
+                        }
                         //PUIS DANS LE MOT
-                        else
+                        else {
                             manqueMot++;
+                            console.log("incrémente DANS mot : "+selectParent.innerHTML.charAt(i));
+                        }
                     }
                 }
 
