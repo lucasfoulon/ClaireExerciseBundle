@@ -105,17 +105,25 @@ class TextExerciseService extends ExerciseCreationService
                 $an = array_pop($annotateTrie);
                 $exerciseText->addAnnotate($an->getValue());
 
-                $remplacement = '<input type="text" ng-model="input">';
-
-
+                // TODO : A COMPARER EN DEUX TEMPS, ...
+                //AVANT LE MOT
                 $plus = substr_count($exerciseText->getText(), "/", 0, $an->getStart());
                 $plusBis = substr_count($exerciseText->getText(), "/", 0, $an->getStart()+$plus);
                 while($plus != $plusBis) {
                     $plus = $plusBis;
                     $plusBis = substr_count($exerciseText->getText(), "/", 0, $an->getStart()+$plus);
                 }
+                //PUIS DANS LE MOT
+                $plusMot = substr_count($exerciseText->getText(), "/", $an->getStart()+$plus, $an->getEnd()-$an->getStart());
+                $plusBisMot = substr_count($exerciseText->getText(), "/", $an->getStart()+$plus, $an->getEnd()+$plusMot-$an->getStart());
+                while($plusMot != $plusBisMot) {
+                    $plusMot = $plusBisMot;
+                    $plusBisMot = substr_count($exerciseText->getText(), "/", $an->getStart()+$plus, $an->getEnd()+$plusMot-$an->getStart());
+                }
 
-                $textTemp = substr_replace($exerciseText->getText(),$remplacement,$an->getStart()+$plus,$an->getEnd()-$an->getStart());
+                //Ajout de la balise
+                $remplacement = '<input type="text" ng-model="input">';
+                $textTemp = substr_replace($exerciseText->getText(),$remplacement,$an->getStart()+$plus,$an->getEnd()+$plusMot-$an->getStart());
                 $exerciseText->setText($textTemp);
             }
 
