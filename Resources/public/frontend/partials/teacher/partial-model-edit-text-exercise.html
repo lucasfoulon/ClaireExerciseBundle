@@ -1,7 +1,7 @@
 <accordion>
     <accordion-group class="panel panel-primary" name="accordionBlock"
                      data-ng-repeat="block in model.content.text_blocks track by $index"
-                     ng-init="openFirst('accordionBlock', $index); metadata_constraints = block.resource_constraint.metadata_constraints; metadata_annotate_constraints = block.resource_annotate_constraint.metadata_constraints; blockTypes = ['text']"
+                     ng-init="openFirst('accordionBlock', $index); metadata_constraints = block.resource_constraint.metadata_constraints; metadata_annotate_constraints = block.resource_annotate_constraint.metadata_constraints; blockTypes = ['text']; block.number_of_occurrences = 1;"
                      is-open="openFirstBlocks.accordionBlock[$index]">
         <accordion-heading class="panel-heading">
 
@@ -14,9 +14,7 @@
             <div class="row">
                 <div class="col-xs-6"
                      title="Le nombre de ressources à utiliser parmi celles de ce bloc pour constituer la liste des objets à trier dans l'exercice">
-                    <h5>Nombre de ressources</h5>
-                    <input type="number" ng-click="$event.stopPropagation();"
-                           ng-model="block.number_of_occurrences" class="form-control" style="height: 25px">
+                    <h5>Nombre de ressources : {{block.number_of_occurrences}}</h5>
                 </div>
             </div>
         </accordion-heading>
