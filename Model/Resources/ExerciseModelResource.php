@@ -67,6 +67,11 @@ class ExerciseModelResource extends SharedResource
     const OPEN_ENDED_QUESTION_CLASS = 'SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\OpenEndedQuestion\Model';
 
     /**
+     * @const TEXT_EXERCISE = 'SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\TextExercise\Model'
+     */
+    const TEXT_EXERCISE = 'SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\TextExercise\Model';
+
+    /**
      * @var int $id Id of exercise model
      * @Serializer\Type("integer")
      * @Serializer\Groups({"details", "list", "exercise"})
@@ -321,6 +326,9 @@ class ExerciseModelResource extends SharedResource
                 break;
             case CommonExercise::MULTIPLE_CHOICE_FORMULA:
                 $class = self::MULTIPLE_CHOICE_FORMULA_MODEL_CLASS;
+                break;
+            case CommonExercise::TEXT_EXERCISE:
+                $class = self::TEXT_EXERCISE;
                 break;
             default:
                 throw new \LogicException('Unknown type');

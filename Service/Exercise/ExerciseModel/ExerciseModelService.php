@@ -51,6 +51,7 @@ use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\OrderItems\Model
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\OrderItems\ObjectBlock as OIObjectBlock;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\PairItems\Model as PairItems;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\PairItems\PairBlock;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\TextExercise\Model as TextExercise;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModelResource;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModelResourceFactory;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseResource\CommonResource;
@@ -186,9 +187,12 @@ class ExerciseModelService extends SharedEntityService implements ExerciseModelS
                 break;
             case CommonExercise::OPEN_ENDED_QUESTION:
                 $class = ExerciseModelResource::OPEN_ENDED_QUESTION_CLASS;
-            break;
+                break;
             case CommonExercise::MULTIPLE_CHOICE_FORMULA:
                 $class = ExerciseModelResource::MULTIPLE_CHOICE_FORMULA_MODEL_CLASS;
+                break;
+            case CommonExercise::TEXT_EXERCISE:
+                $class = ExerciseModelResource::TEXT_EXERCISE;
                 break;
 
             default:
@@ -422,6 +426,11 @@ class ExerciseModelService extends SharedEntityService implements ExerciseModelS
                 case CommonModel::OPEN_ENDED_QUESTION:
                     /** @var OpenEnded $content */
                     $complete = $this->checkOEQComplete($content, $errorCode);
+                    break;
+                case CommonModel::TEXT_EXERCISE:
+                    /** @var TextExercise $content */
+                    //$complete = $this->checkOEQComplete($content, $errorCode);
+                    $complete = true;
                     break;
                 default:
                     throw new InconsistentEntityException('Invalid type');
@@ -1142,6 +1151,19 @@ class ExerciseModelService extends SharedEntityService implements ExerciseModelS
                             $ownerId,
                             $originalOwner
                         )
+                );
+                break;
+            case ExerciseModelResource::TEXT_EXERCISE:
+                /** @var TextExercise $content */
+                $reqRes = array_merge(
+                    $reqRes,
+                    $this->computeRequiredResourcesFromModelBlocks
+                    (
+                        $content->getTextBlocks(),
+                        $import,
+                        $ownerId,
+                        $originalOwner
+                    )
                 );
                 break;
             default:

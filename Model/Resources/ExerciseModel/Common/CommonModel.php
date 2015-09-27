@@ -32,7 +32,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    "order-items": "SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\OrderItems\Model",
  *    "multiple-choice": "SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\MultipleChoice\Model",
  *    "multiple-choice-formula": "SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\MultipleChoiceFormula\Model",
- *    "open-ended-question": "SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\OpenEndedQuestion\Model"
+ *    "open-ended-question": "SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\OpenEndedQuestion\Model",
+ *    "text-exercise": "SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\TextExercise\Model"
  * })
  */
 abstract class CommonModel
@@ -66,6 +67,11 @@ abstract class CommonModel
      * @const OPEN_ENDED_QUESTION = "open-ended-question"
      */
     const OPEN_ENDED_QUESTION = "open-ended-question";
+
+    /**
+     * @const TEXT_EXERCISE = "text-exercise"
+     */
+    const TEXT_EXERCISE = "text-exercise";
 
 
     /**

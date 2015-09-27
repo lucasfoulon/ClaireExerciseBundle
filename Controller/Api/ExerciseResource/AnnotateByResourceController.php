@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\DBALException;
 use SimpleIT\ClaireExerciseBundle\Controller\BaseController;
 use SimpleIT\ClaireExerciseBundle\Entity\Annotate\Annotate;
-use SimpleIT\ClaireExerciseBundle\Entity\AnnotateFactory;
+use SimpleIT\ClaireExerciseBundle\Entity\ListAnnotateFactory;
 use SimpleIT\ClaireExerciseBundle\Exception\Api\ApiBadRequestException;
 use SimpleIT\ClaireExerciseBundle\Exception\Api\ApiConflictException;
 use SimpleIT\ClaireExerciseBundle\Exception\Api\ApiNotFoundException;
@@ -24,6 +24,8 @@ use SimpleIT\ClaireExerciseBundle\Model\Api\ApiGotResponse;
 use SimpleIT\ClaireExerciseBundle\Model\Collection\CollectionInformation;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateResource;
 use SimpleIT\ClaireExerciseBundle\Model\Resources\AnnotateResourceFactory;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\ListAnnotateResource;
+use SimpleIT\ClaireExerciseBundle\Model\Resources\ListAnnotateResourceFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 class AnnotateByResourceController extends BaseController
@@ -38,17 +40,19 @@ class AnnotateByResourceController extends BaseController
      * @return ApiGotResponse
      */
     public function listAction(
-        $resourceId
+        $resourceId,
+        $listAnnotateId
     )
     {
         try {
             $annotates = $this->get('simple_it.exercise.annotate')->getAll(
                 $resourceId,
+                $listAnnotateId,
                 $this->getUserId()
             );
 
-            //$annotateResources = AnnotateResourceFactory::createCollection($annotates);
-            $annotateResources = "ok";
+            $annotateResources = AnnotateResourceFactory::createCollection($annotates);
+            //$annotateResources = "ok";
 
             return new ApiGotResponse($annotateResources);
         } catch (NonExistingObjectException $neoe) {

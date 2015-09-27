@@ -50,6 +50,11 @@ mainApp.config(
                 url: '/open-ended-question/:itemId',
                 templateUrl: BASE_CONFIG.urls.partials.learner + '/partial-open-ended-question.html'
             });
+
+            $stateProvider.state('attempt.text-exercise', {
+                url: '/text-exercise/:itemId',
+                templateUrl: BASE_CONFIG.urls.partials.learner + '/partial-text-exercise.html'
+            });
         }
     ]
 );

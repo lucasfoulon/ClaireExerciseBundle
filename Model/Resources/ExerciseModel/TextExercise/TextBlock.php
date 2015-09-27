@@ -26,6 +26,7 @@ use SimpleIT\ClaireExerciseBundle\Model\Resources\ExerciseModel\Common\ResourceB
  */
 class TextBlock extends ResourceBlock
 {
+
     /**
      * TextBlock constructor
      *
