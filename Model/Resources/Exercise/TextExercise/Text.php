@@ -32,6 +32,13 @@ class Text extends CommonItem implements Markable
     private $annotates = array();
 
     /**
+     * @var Integer $text The text
+     * @Serializer\Type("integer")
+     * @Serializer\Groups({"details", "corrected", "not_corrected", "item_storage"})
+     */
+    private $nbAnnotate;
+
+    /**
      * Set text
      *
      * @param string $text
@@ -62,12 +69,48 @@ class Text extends CommonItem implements Markable
     }
 
     /**
+     * Add an annotate to start
+     *
+     * @param string  $text  The annotate text
+     */
+    public function addStartAnnotate($text)
+    {
+        array_unshift($this->annotates, new Annotate($text));
+    }
+
+    /**
      * Get annotates
      *
-     * @return array An array ofAnnotate.
+     * @return array An array of Annotate.
      */
     public function getAnnotates()
     {
         return $this->annotates;
+    }
+
+    /**
+     * Set annotates
+     *
+     * @param array $annotates
+     */
+    public function setAnnotates($annotates)
+    {
+        $this->annotates = $annotates;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbAnnotate()
+    {
+        return $this->nbAnnotate;
+    }
+
+    /**
+     * @param int $nbAnnotate
+     */
+    public function setNbAnnotate($nbAnnotate)
+    {
+        $this->nbAnnotate = $nbAnnotate;
     }
 }

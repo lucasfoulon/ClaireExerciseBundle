@@ -25,38 +25,38 @@ class Exercise extends CommonExercise
     /**
      * @var array $annotates An array of Annotate
      * @Serializer\Exclude
-     */
-    private $annotates = array();
+     *
+    private $annotates = array();*/
 
     /**
      * Get annotates
      *
      * @return array An array of annotate
-     */
+     *
     public function getAnnotates()
     {
         return $this->annotates;
-    }
+    }*/
 
     /**
      * Get annotate
      *
      * @param Annotate $annotate
-     */
+     *
     public function setAnnotate($annotate)
     {
         $this->annotates = $annotate;
-    }
+    }*/
 
     /**
      * Add a annotate
      *
      * @param Annotate $annotate
-     */
+     *
     public function addAnnotate(Annotate $annotate)
     {
         $this->annotates[] = $annotate;
-    }
+    }*/
 
     /**
      * Get text

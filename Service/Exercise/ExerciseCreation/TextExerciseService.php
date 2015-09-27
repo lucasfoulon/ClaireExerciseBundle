@@ -100,10 +100,15 @@ class TextExerciseService extends ExerciseCreationService
                 }
             }
 
+            $exerciseText->setNbAnnotate(sizeof($annotateTrie));
+
             while(!empty($annotateTrie)) {
 
                 $an = array_pop($annotateTrie);
-                $exerciseText->addAnnotate($an->getValue());
+
+                //Ajoute les réponses dans la réponse à la requête...
+                //Peux servir pour les propositions...
+                $exerciseText->addStartAnnotate($an->getValue());
 
                 // TODO : A COMPARER EN DEUX TEMPS, ...
                 //AVANT LE MOT
@@ -122,7 +127,8 @@ class TextExerciseService extends ExerciseCreationService
                 }
 
                 //Ajout de la balise
-                $remplacement = '<input type="text" ng-model="input">';
+                //$numAnnotate = (sizeof($annotateTrie)+1);
+                $remplacement = '<input type="text" id="input'.(sizeof($annotateTrie)+1).'">';
                 $textTemp = substr_replace($exerciseText->getText(),$remplacement,$an->getStart()+$plus,$an->getEnd()+$plusMot-$an->getStart());
                 $exerciseText->setText($textTemp);
             }
@@ -174,20 +180,20 @@ class TextExerciseService extends ExerciseCreationService
      */
     public function correct(Item $entityItem, Answer $answer)
     {
-        // MARCHE PAS
-        //$entityItem->setType('text-exercise');
-        //$entityItem->setContent('{"question":"Pourquoi \u00e7a marche pas?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}');
-
         $itemResource = ItemResourceFactory::create($entityItem);
-        /** @var Annotate $annotate */
-        $annotate = $itemResource->getContent();
+        /** @var Text $text */
+        $text = $itemResource->getContent();
+        $la = AnswerResourceFactory::create($answer);
 
-        //$this->mark($question);
-        //$question->setType('text-exercise');
-        //$item->setContent('{"question":"Pourquoi \u00e7a marche pas?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}');
+        $userTicks = $la->getContent();
+        $annotates = $text->getAnnotates();
 
-        //annotate ='{"question":"Pourquoi \u00e7a marche pas?","propositions":[{"text":"pour le moment"},{"text":"on a gagn\u00e9"},{"text":"pourquoi pas"},{"text":"on sait pas"}],"origin_resource":2,"item_type":"multiple-choice-formula-question"}';
-        //$itemResource->setContent($annotate);
+        foreach($annotates as $an) {
+            $text->setText($text->getText().$an->getText());
+
+        }
+
+        $itemResource->setContent($text);
 
         return $itemResource;
     }
@@ -211,15 +217,10 @@ class TextExerciseService extends ExerciseCreationService
      */
     public function noSolutionItem($itemResource)
     {
-        /** @var Question $content */
+        /** @var Text $content */
         $content = $itemResource->getContent();
 
-        //$content->setComment(null);
-
-        /** @var Proposition $prop */
-        /*foreach ($content->getPropositions() as $prop) {
-            $prop->setRight(null);
-        }*/
+        $content->setAnnotates(null);
 
         return $itemResource;
     }

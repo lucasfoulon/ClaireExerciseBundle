@@ -634,4 +634,36 @@ itemControllers.controller('textExerciseController', ['$sce', '$scope', 'Answer'
 
         $scope.item['content'].textHTML = $sce.trustAsHtml($scope.item['content'].text);
 
+        $scope.validable = true;
+
+        $scope.saveAnswer = function () {
+            //$scope.validable = false;
+
+            var nb_annotation = $scope.item['content'].nb_annotate;
+            var val1 = $("#input1")[0].value;
+
+            console.log($("#input1"));
+            console.log("testSave : "+ val1);
+
+            var answer = new Answer;
+            answer.content = [];
+
+            for (i = 1; i <= nb_annotation; ++i) {
+                val = $("#input"+i)[0].value;
+
+                answer.content.push(val);
+            }
+
+            answer.$save({itemId: $scope.item.item_id, attemptId: $stateParams.attemptId},
+                function (item) {
+                    $scope.items[$stateParams.itemId] = item;
+                    $scope.displayCorrection(item)
+                });
+        }
+
+        // correction
+        $scope.displayCorrection = function (item) {
+            console.log("correct!");
+        }
+
     }]);
